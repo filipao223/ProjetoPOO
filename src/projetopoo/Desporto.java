@@ -10,22 +10,18 @@ package projetopoo;
  * @author filipe
  */
 public class Desporto {
-    private String tipo;
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    private final String tipo;
 
     public Desporto(String tipo) {
         this.tipo = tipo;
     }
     
+    public String getTipo() {
+        return tipo;
+    }
+    
     @Override
     public String toString(){
-        return "Tipo: " + tipo;
+        return this.getClass().getName() + ", tipo: " + tipo;
     }
 }

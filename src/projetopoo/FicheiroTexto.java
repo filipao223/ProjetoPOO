@@ -51,15 +51,21 @@ public class FicheiroTexto {
 //Formato do ficheiro texto
 /*
     ---Pessoas---
-        1 nome perfil tipo parametro //Tipo varia entre 1 e 3, 1 se Prof, 2 se Func, 3 se Aluno
+        1 nome perfil tipo parametro  (1 Prof1 boemio prof associado)
         2 nome perfil tipo parametro
         3 nome perfil tipo parametro
 
     ---Locais---
-        1 coordGPS tipo parametro
+        1 coordGPS tipo parametro (1 234_21 exposicao pintura 35)
         2 coordGPS tipo parametro
 
     ---Convivio---
         1 nome
+    ---Desportos---
+        1 futebol
+        2 tenis
 
+Locais podem ser:
+1 234_21 exposicao pintura 35
+1 234_21 bar 120(lotacao) 5(percentagem guest list) 5(consMinimo)
 */

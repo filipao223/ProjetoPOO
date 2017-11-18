@@ -17,7 +17,8 @@ class Func extends Pessoa{
     private String nome, perfil, password, tipo;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
-    private final int maxLocais = 5, countLocais = 0;
+    private final int maxLocais = 5;
+    private int contLocais = 0;
     
     protected Convivio convInscrito;
     
@@ -48,16 +49,8 @@ class Func extends Pessoa{
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getPerfil() {
         return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
     }
 
     private String getPassword() {
@@ -71,8 +64,9 @@ class Func extends Pessoa{
     public String getTipo() {
         return tipo;
     }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    
+    @Override
+    public String toString(){
+        return this.getClass().getName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", tempo: " + this.getTipo();
     }
 }

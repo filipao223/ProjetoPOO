@@ -15,8 +15,13 @@ class ParqueDesporto extends Parque{
     
     protected ArrayList<Desporto> listaDesportos = new ArrayList<>();
     protected Convivio convInscrito;
+    private final String coordGPS;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+    
+    public ParqueDesporto(String coordGPS) {
+        this.coordGPS = coordGPS;
+    }
     
     @Override
     protected int addPessoa(Pessoa p){
@@ -34,5 +39,14 @@ class ParqueDesporto extends Parque{
     @Override
     protected int receita(){
         return 1;
+    }
+    
+    public String getCoordGPS(){
+        return this.coordGPS;
+    }
+    
+    @Override
+    public String toString(){
+        return this.getClass().getName() + ", coordenadas: " + this.getCoordGPS();
     }
 }

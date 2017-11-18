@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 class Convivio {
     
-    private String nome;
+    private final String nome;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
@@ -25,10 +25,6 @@ class Convivio {
         return nome;
     }
 
-    protected void setNome(String nome) {
-        this.nome = nome;
-    }
-    
     protected int addPessoa(Pessoa p){
         for(Pessoa pessoa:this.listaPessoas){
             if(pessoa == p){
@@ -47,5 +43,10 @@ class Convivio {
     
     private boolean login(String pw){
         return true;
+    }
+    
+    @Override
+    public String toString(){
+        return "Nome: " + this.getNome();
     }
 }

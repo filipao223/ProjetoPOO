@@ -13,14 +13,15 @@ import java.util.ArrayList;
  */
 class Exposicao extends Local{
 
-    private String forma;
+    private final String forma, coordGPS;
     private int custoIngresso;
     protected Convivio convivioInscrito;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
-    public Exposicao(String forma, int custo){
+    public Exposicao(String coordGPS, String forma, int custo){
         this.forma = forma;
+        this.coordGPS = coordGPS;
         this.custoIngresso = custo;
     }
     
@@ -44,15 +45,11 @@ class Exposicao extends Local{
     
     @Override
     public String toString(){
-        return "";
+        return this.getClass().getName() + ", forma: " + this.forma + ", Coordenadas: " + this.coordGPS + ", Custo: " + this.custoIngresso;
     }
 
     public String getForma() {
         return forma;
-    }
-
-    public void setForma(String forma) {
-        this.forma = forma;
     }
 
     public int getCustoIngresso() {

@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 class Prof extends Pessoa{
 
-    private String perfil, password, tipo;
+    private String nome, perfil, password, tipo;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
     private int contLocais = 0;
@@ -24,7 +24,8 @@ class Prof extends Pessoa{
     
     Scanner sc = new Scanner(System.in);
     
-    public Prof(String perfil, String tipo) {
+    public Prof(String nome, String perfil, String tipo) {
+        this.nome = nome;
         this.perfil = perfil;
         this.tipo = tipo;
     }
@@ -51,10 +52,6 @@ class Prof extends Pessoa{
     public String getTipo() {
         return tipo;
     }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
     
     private String getPassword() {
         return password;
@@ -67,8 +64,13 @@ class Prof extends Pessoa{
     public String getPerfil() {
         return perfil;
     }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    
+    public String getNome(){
+        return this.nome;
+    }
+    
+    @Override
+    public String toString(){
+        return this.getClass().getName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", professor: " + this.getTipo();
     }
 }

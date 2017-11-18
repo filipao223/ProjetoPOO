@@ -13,12 +13,13 @@ import java.util.ArrayList;
  */
 class Jardim extends Parque{
 
-    private String area, coordGPS;
+    private final String coordGPS;
+    private final String area;
     protected Convivio convInscrito;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
-    public Jardim(String area, String coordGPS) {
+    public Jardim(String coordGPS, String area) {
         this.area = area;
         this.coordGPS = coordGPS;
     }
@@ -27,16 +28,8 @@ class Jardim extends Parque{
         return coordGPS;
     }
 
-    public void setCoordGPS(String coordGPS) {
-        this.coordGPS = coordGPS;
-    }
-
     public String getArea() {
         return area;
-    }
-
-    private void setArea(String area) {
-        this.area = area;
     }
     
     @Override
@@ -59,6 +52,6 @@ class Jardim extends Parque{
     
     @Override
     public String toString(){
-        return "Area: " + area;
+        return this.getClass().getName() + ", area: " + area;
     }
 }
