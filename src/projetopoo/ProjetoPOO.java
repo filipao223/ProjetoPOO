@@ -27,7 +27,7 @@ public class ProjetoPOO {
         //Lê dos ficheiros
         try{
             loadConfig(listaPessoas, listaLocais, listaConvivios, listaDesportos);
-            System.out.println("Config carregadoo . ");
+            System.out.println("Configuraçoes carregadas.");
         }catch(IOException ioexcep){
             System.out.println("Erro ao carregar as informaçoes: " + ioexcep);
         }
