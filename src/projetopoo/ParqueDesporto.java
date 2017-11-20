@@ -41,12 +41,18 @@ class ParqueDesporto extends Parque{
         return 1;
     }
     
+    @Override
     public String getCoordGPS(){
         return this.coordGPS;
     }
     
     @Override
+    public ArrayList<Pessoa> getPessoas(){
+        return this.listaPessoas;
+    }
+    
+    @Override
     public String toString(){
-        return this.getClass().getName() + ", coordenadas: " + this.getCoordGPS();
+        return this.getClass().getSimpleName() + ", coordenadas: " + this.getCoordGPS();
     }
 }

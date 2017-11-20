@@ -23,14 +23,6 @@ class Jardim extends Parque{
         this.area = area;
         this.coordGPS = coordGPS;
     }
-
-    public String getCoordGPS() {
-        return coordGPS;
-    }
-
-    public String getArea() {
-        return area;
-    }
     
     @Override
     protected int addPessoa(Pessoa p){
@@ -46,12 +38,32 @@ class Jardim extends Parque{
     }
     
     @Override
+    public String getForma(){
+        return "";
+    }
+    
+    @Override
+    public String getCoordGPS() {
+        return coordGPS;
+    }
+    
+    @Override
+    public String getArea() {
+        return area;
+    }
+    
+    @Override
     protected int receita(){
         return 1;
     }
     
     @Override
+    public ArrayList<Pessoa> getPessoas(){
+        return this.listaPessoas;
+    }
+    
+    @Override
     public String toString(){
-        return this.getClass().getName() + ", area: " + area;
+        return this.getClass().getSimpleName() + ", area: " + area;
     }
 }

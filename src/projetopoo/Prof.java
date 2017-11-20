@@ -14,7 +14,8 @@ import java.util.Scanner;
  */
 class Prof extends Pessoa{
 
-    private String nome, perfil, password, tipo;
+    private final String nome, perfil, tipo;
+    private String password;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
     private int contLocais = 0;
@@ -31,24 +32,46 @@ class Prof extends Pessoa{
     }
     
     @Override
-    public int inscricao(Convivio convivio){
+    protected int inscricao(Convivio convivio){
         if(convInscrito != null){
             System.out.println("Erro. Pessoa já inscrita num convivio.");
             return 0;
         }
-        else{
-            convInscrito = convivio;
+        
+        convInscrito = convivio;
 
-            System.out.print("Introduza password: ");
-            this.setPassword(sc.nextLine());
-            return 1;
-        }
+        System.out.print("Introduza password: ");
+        this.setPassword(sc.nextLine());
+        return 1;
     }
     
-    public void incrContLocais(){
+    @Override
+    protected int addLocal(Local local){
+        if(this.contLocais>=this.maxLocais){
+            System.out.println("\nErro. Numero maximo de locais incritos atingido.");
+            return 0;
+        }
+        
+        for(Local l:this.listaLocais){
+            if(local == l){
+                System.out.println("\nErro. Pessoa já está inscrita neste local.");
+                return 0;
+            }
+        }
+        
+        this.listaLocais.add(local);
+        local.addPessoa(this);
+        this.incrContLocais();
+        System.out.println("Pessoa inscrita em local.");
+        
+        return 1;
+    } 
+    
+    private void incrContLocais(){
         this.contLocais++;
     }
-
+    
+    @Override
     public String getTipo() {
         return tipo;
     }
@@ -56,21 +79,28 @@ class Prof extends Pessoa{
     private String getPassword() {
         return password;
     }
-
+    
     private void setPassword(String password) {
         this.password = password;
     }
-
+    
+    @Override
     public String getPerfil() {
         return perfil;
     }
     
+    @Override
     public String getNome(){
         return this.nome;
     }
     
     @Override
+    public ArrayList<Local> getLocais(){
+        return this.listaLocais;
+    }
+    
+    @Override
     public String toString(){
-        return this.getClass().getName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", professor: " + this.getTipo();
+        return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", professor: " + this.getTipo();
     }
 }

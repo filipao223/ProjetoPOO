@@ -14,7 +14,7 @@ import java.util.ArrayList;
 class Exposicao extends Local{
 
     private final String forma, coordGPS;
-    private int custoIngresso;
+    private final int custoIngresso;
     protected Convivio convivioInscrito;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
@@ -39,24 +39,32 @@ class Exposicao extends Local{
     }
     
     @Override
+    public String getCoordGPS(){
+        return this.coordGPS;
+    }
+    
+    @Override
     protected int receita(){
         return 1;
     }
     
     @Override
     public String toString(){
-        return this.getClass().getName() + ", forma: " + this.forma + ", Coordenadas: " + this.coordGPS + ", Custo: " + this.custoIngresso;
+        return this.getClass().getSimpleName() + ", forma: " + this.forma + ", Coordenadas: " + this.coordGPS + ", Custo: " + this.custoIngresso;
     }
-
+    
+    @Override
     public String getForma() {
         return forma;
     }
-
+    
+    @Override
     public int getCustoIngresso() {
         return custoIngresso;
     }
-
-    public void setCustoIngresso(int custoIngresso) {
-        this.custoIngresso = custoIngresso;
+    
+    @Override
+    public ArrayList<Pessoa> getPessoas(){
+        return this.listaPessoas;
     }
 }
