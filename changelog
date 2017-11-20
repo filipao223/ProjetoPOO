@@ -1,0 +1,9 @@
+v0.010
+Adiciona string para nome em Prof e Aluno (alterando construtores);
+Adiciona construtor de Bar e ParqueDesporto;
+Altera construtores de Exposicao e Bar para incluirem coordenadas GPS;
+Altera o tipo de area, coordGPS, forma(Exposicao) e tipo(Deporto) para final;
+Remove alguns setters (algumas variaveis eram inicializadas no construtor, outras sao final);
+Altera toString's;
+Adiciona método para carregar listas do ficheiro;
+v0.015

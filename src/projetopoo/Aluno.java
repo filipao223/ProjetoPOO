@@ -17,7 +17,8 @@ class Aluno extends Pessoa{
     private String nome, perfil, password, tipo;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
-    private final int maxLocais = 5, countLocais = 0;
+    private final int maxLocais = 5;
+    private int contLocais = 0;
     
     protected Convivio convInscrito;
     
@@ -44,16 +45,40 @@ class Aluno extends Pessoa{
         }
     }
     
+    @Override
+    protected int addLocal(Local local){
+        if(this.contLocais>=this.maxLocais){
+            System.out.println("\nErro. Numero maximo de locais incritos atingido.");
+            return 0;
+        }
+        
+        for(Local l:this.listaLocais){
+            if(local == l){
+                System.out.println("\nErro. Pessoa já está inscrita neste local.");
+                return 0;
+            }
+        }
+        
+        this.listaLocais.add(local);
+        local.addPessoa(this);
+        this.incrContLocais();
+        System.out.println("Pessoa inscrita no local.");
+        
+        return 1;
+    }
+    
+    private void incrContLocais(){
+        this.contLocais++;
+    }
+    
+    @Override
     public String getNome(){
         return this.nome;
     }
-
+    
+    @Override
     public String getPerfil() {
         return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
     }
 
     private String getPassword() {
@@ -63,17 +88,19 @@ class Aluno extends Pessoa{
     private void setPassword(String password) {
         this.password = password;
     }
-
+    
+    @Override
     public String getTipo() {
         return tipo;
     }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    
+    @Override
+    public ArrayList<Local> getLocais(){
+        return this.listaLocais;
     }
     
     @Override
     public String toString(){
-        return this.getClass().getName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", curso: " + this.getTipo();
+        return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", curso: " + this.getTipo();
     }
 }

@@ -22,6 +22,6 @@ public class Desporto {
     
     @Override
     public String toString(){
-        return this.getClass().getName() + ", tipo: " + tipo;
+        return "Desporto" + ", tipo: " + tipo;
     }
 }
