@@ -1,7 +1,7 @@
 # ProjetoPOO
 
-### ~~1. Inscrição no convívio
-- A inscrição está restrita aos membros da comunidade do DEI
+### 1. Inscrição no convívio
+~~- A inscrição está restrita aos membros da comunidade do DEI
 - Cada pessoa deve inserir uma palavra chave para controlo de
 acesso~~
 
