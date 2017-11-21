@@ -7,8 +7,8 @@
 
 ### 2. Apresentação dos locais a visitar
 - Após a inscrição, a aplicação deve mostrar a lista dos locais que
-podem ser visitados-
-A aplicação dever permitir visualizar o número atual de inscritos em
+podem ser visitados
+- A aplicação dever permitir visualizar o número atual de inscritos em
 cada local e a lotação (quando se aplica)
 
 ### 3. Seleção dos locais a visitar
