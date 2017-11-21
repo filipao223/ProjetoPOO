@@ -1,9 +1,9 @@
 # ProjetoPOO
 
-### 1. Inscrição no convívio
-~~- A inscrição está restrita aos membros da comunidade do DEI
-- Cada pessoa deve inserir uma palavra chave para controlo de
-acesso~~
+### ~~1. Inscrição no convívio~~
+- ~~A inscrição está restrita aos membros da comunidade do DEI~~
+- ~~Cada pessoa deve inserir uma palavra chave para controlo de~~
+~~acesso~~
 
 ### 2. Apresentação dos locais a visitar
 - Após a inscrição, a aplicação deve mostrar a lista dos locais que
