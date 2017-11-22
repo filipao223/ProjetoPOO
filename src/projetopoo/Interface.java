@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 
 class Inscriçao extends JFrame{
@@ -46,7 +47,7 @@ class Inscriçao extends JFrame{
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                System.exit(0);
+                dispose();
             }
     });
         combo = new JComboBox(new String[]{"...","..."});
@@ -123,15 +124,17 @@ class Inscriçao extends JFrame{
     
 class Cria extends JFrame{
     private final JTextField nome;
-    private final JTextField password;
+    private final JPasswordField password;
+    private final JPasswordField confirmapass;
     private final JLabel label1;
     private final JLabel label2;
+    private final JLabel label3;
     private final JButton buttonCria;
     private final JButton buttonLimpa;
     private final JButton buttonSai;
     
     public Cria(){
-        this.setPreferredSize(new Dimension(200,200));
+        this.setPreferredSize(new Dimension(275,200));
         this.setTitle("Criar Conta");
         this.setLocation(100,100);
         this.setVisible(true);
@@ -144,24 +147,38 @@ class Cria extends JFrame{
     
         
         label2 = new JLabel("Password"); this.add(label2);
-        password = new JTextField(); this.add(password);
+        password = new JPasswordField(); this.add(password);
         password.setPreferredSize(new Dimension(80,20));
         
+        label3 = new JLabel("Confirma Password"); this.add(label3);
+        confirmapass = new JPasswordField(); this.add(confirmapass);
+        confirmapass.setPreferredSize(new Dimension(80,20));
+        
         buttonCria = new JButton("Cria");this.add(buttonCria);
+        buttonCria.addActionListener(new ActionListener(){
+           @Override
+           public void actionPerformed(ActionEvent event){
+                    
+                    if ((confirmapass.getPassword().equals(password.getPassword())) == false){
+                        JOptionPane.showMessageDialog(null, "Passwords não iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
+                    }
+           }
+        });
         
         buttonLimpa = new JButton("Limpa");this.add(buttonLimpa);
         buttonLimpa.addActionListener(new ActionListener(){
         @Override
             public void actionPerformed(ActionEvent event){
                     nome.setText("");
-                    password.setText("");           
+                    password.setText("");
+                    confirmapass.setText("");
             }
         });
         buttonSai = new JButton("Sai");this.add(buttonSai);
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                System.exit(0);
+                dispose();
             }
     });
         
@@ -172,7 +189,7 @@ class Cria extends JFrame{
 class Login extends JFrame{
     
     private final JTextField nome;
-    private final JTextField password;
+    private final JPasswordField password;
     private final JLabel label1;
     private final JLabel label2;
     private final JButton buttonLogin;
@@ -183,7 +200,7 @@ class Login extends JFrame{
     
     public Login(){
         
-        this.setPreferredSize(new Dimension(200,200));
+        this.setPreferredSize(new Dimension(200,300));
         this.setTitle("Login");
         this.setLocation(100,100);
         this.setVisible(true);
@@ -196,10 +213,16 @@ class Login extends JFrame{
     
         
         label2 = new JLabel("Password"); this.add(label2);
-        password = new JTextField(); this.add(password);
+        password = new JPasswordField(); this.add(password);
         password.setPreferredSize(new Dimension(80,20));
         
         buttonLogin = new JButton("Login");this.add(buttonLogin);
+        buttonLogin.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                Inscriçao Interface = new Inscriçao();
+            }
+        });
         
         buttonLimpa = new JButton("Limpa");this.add(buttonLimpa);
         buttonLimpa.addActionListener(new ActionListener(){
@@ -213,10 +236,55 @@ class Login extends JFrame{
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                System.exit(0);
+                dispose();
             }
     });
         
+        this.pack();
+    }
+}
+    
+class Inicial extends JFrame{
+        
+    private final JButton buttonCria;
+    private final JButton buttonLogin;
+    private final JButton buttonSai;
+        
+        
+    public Inicial(){
+        
+        this.setPreferredSize(new Dimension(200,300));
+        this.setTitle("Inicio");
+        this.setLocation(100,100);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+            
+        buttonCria = new JButton("Cria Conta");this.add(buttonCria);
+        buttonCria.addActionListener(new ActionListener(){
+        @Override 
+            public void actionPerformed(ActionEvent event){
+                Cria Interface = new Cria();
+            }
+        
+        });
+            
+        buttonLogin = new JButton("Entrar na Conta");this.add(buttonLogin);
+        buttonLogin.addActionListener(new ActionListener(){
+        @Override 
+            public void actionPerformed(ActionEvent event){
+                Login Interface = new Login();
+            }
+        });
+            
+        buttonSai = new JButton("Sair");this.add(buttonSai);
+        buttonSai.addActionListener(new ActionListener(){
+        @Override
+            public void actionPerformed(ActionEvent event){
+                System.exit(0);
+        }
+    });
+            
         this.pack();
     }
 }

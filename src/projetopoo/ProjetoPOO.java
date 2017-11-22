@@ -21,6 +21,10 @@ public class ProjetoPOO {
     public static void main(String[] args) {
         
         ArrayList<Pessoa> comunidadeDEI = new ArrayList<>();
+        Inicial Interface = new Inicial();
+        
+        ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+
         ArrayList<Local> listaLocais = new ArrayList<>();
         ArrayList<Convivio> listaConvivios = new ArrayList<>();
         ArrayList<Desporto> listaDesportos = new ArrayList<>();
