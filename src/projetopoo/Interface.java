@@ -8,22 +8,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
-class Inscriçao extends JFrame{
+class Inscriçao_Convivio extends JFrame{
     private final JCheckBox buttonInscrever;
     private final JButton buttonSai;
-    private final JRadioButton Exposições;
-    private final JRadioButton Bares;
-    private final JRadioButton Jardins;
-    private final JRadioButton Desporto;
     private final JComboBox combo;
-    //private final JComboBox combo_2;
     
-    public Inscriçao(){
+    public Inscriçao_Convivio(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
         this.setPreferredSize(new Dimension(400,400));
-        this.setTitle("Inscrições");
+        this.setTitle("Inscrições Convívio");
         this.setLocation(100,100);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,10 +29,55 @@ class Inscriçao extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
-                    //increver
+                    
+                    Inscriçao_Locais Interface = new Inscriçao_Locais(listaC,listaL);
                     buttonInscrever.setSelected(false);
-                    //combo_2.removeAllItems();
-                    //combo_2.addItem("a");
+                    
+                }
+            }
+        });
+        
+        buttonSai = new JButton("Sai");this.add(buttonSai);
+        buttonSai.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                dispose();
+            }
+    });
+        
+        combo = new JComboBox(listaC.toArray());
+                        
+        this.add(combo);
+        
+        this.pack();
+    }
+    
+}
+
+
+class Inscriçao_Locais extends JFrame{
+    private final JCheckBox buttonInscrever;
+    private final JButton buttonSai;
+    private final JRadioButton Exposições;
+    private final JRadioButton Bares;
+    private final JRadioButton Jardins;
+    private final JRadioButton Desporto;
+    private final JComboBox combo;
+    
+    public Inscriçao_Locais(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
+        this.setPreferredSize(new Dimension(400,400));
+        this.setTitle("Inscrições Locais");
+        this.setLocation(100,100);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+        
+        buttonInscrever = new JCheckBox("Inscrever");this.add(buttonInscrever);
+        buttonInscrever.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                if(buttonInscrever.isSelected()){
+                    buttonInscrever.setSelected(false);
                     
                 }
             }
@@ -54,10 +94,6 @@ class Inscriçao extends JFrame{
                         
         this.add(combo);
         
-        //combo_2 = new JComboBox(new String[]{"..."});
-                        
-        //this.add(combo_2);
-        
         ButtonGroup group = new ButtonGroup();
         Exposições = new JRadioButton("Exposições",true);
         Exposições.addActionListener(new ActionListener(){
@@ -65,8 +101,14 @@ class Inscriçao extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Exposições.isSelected()){
                     combo.removeAllItems();
-                    combo.addItem("Exposição1");
-                    combo.addItem("Exposição2");
+                    for(int i=0; i<listaL.size() ; i++){
+                        if (listaL.get(i).getClass() == Exposicao.class) {
+                            combo.addItem(listaL.get(i));
+                        }
+                        
+                    }
+                    
+                    
                 }
             }
         });
@@ -81,8 +123,13 @@ class Inscriçao extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Bares.isSelected()){
                     combo.removeAllItems();
-                    combo.addItem("Bar1");
-                    combo.addItem("Bar2");
+                    for(int i=0; i<listaL.size() ; i++){
+                        if (listaL.get(i).getClass() == Bar.class) {
+                            combo.addItem(listaL.get(i));
+                        }
+                        
+                    }
+                    
                 }
             }
         });
@@ -96,8 +143,12 @@ class Inscriçao extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Jardins.isSelected()){
                     combo.removeAllItems();
-                    combo.addItem("Jardim1");
-                    combo.addItem("Jardim2");
+                    for(int i=0; i<listaL.size() ; i++){
+                        if (listaL.get(i).getClass() == ParqueDesporto.class) {
+                            combo.addItem(listaL.get(i));
+                        }
+                        
+                    }
                 }
             }
         });
@@ -110,11 +161,14 @@ class Inscriçao extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Desporto.isSelected()){
                     combo.removeAllItems();
-                    combo.addItem("Desporto1");
-                    combo.addItem("Desporto2");
+                    for(int i=0; i<listaL.size() ; i++){
+                        if (listaL.get(i).getClass() == ParqueDesporto.class) {
+                            combo.addItem(listaL.get(i));
+                        }
+                    }
                 }
             }
-        }); 
+        });
         group.add(Desporto);
         this.add(Desporto);
         
@@ -133,7 +187,7 @@ class Cria extends JFrame{
     private final JButton buttonLimpa;
     private final JButton buttonSai;
     
-    public Cria(){
+    public Cria(ArrayList<Pessoa> listaP){
         this.setPreferredSize(new Dimension(275,200));
         this.setTitle("Criar Conta");
         this.setLocation(100,100);
@@ -145,7 +199,6 @@ class Cria extends JFrame{
         nome = new JTextField(); this.add(nome);
         nome.setPreferredSize(new Dimension(60,20));
     
-        
         label2 = new JLabel("Password"); this.add(label2);
         password = new JPasswordField(); this.add(password);
         password.setPreferredSize(new Dimension(80,20));
@@ -158,10 +211,22 @@ class Cria extends JFrame{
         buttonCria.addActionListener(new ActionListener(){
            @Override
            public void actionPerformed(ActionEvent event){
+               
+                    String passwords = new String(password.getPassword());
+                    String confirmapassword = new String(confirmapass.getPassword());
+                    String nomeInterface = new String(nome.getText());
                     
-                    if ((confirmapass.getPassword().equals(password.getPassword())) == false){
-                        JOptionPane.showMessageDialog(null, "Passwords não iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
-                    }
+                    //for(int i=0; i<listaP.size() ; i++){
+                        //if(nomeInterface.equals(listaP.get(i))){
+                            if ((passwords.equals(confirmapassword)) == false){
+                                JOptionPane.showMessageDialog(null, "Passwords não iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            if ((passwords.equals(confirmapassword))){
+                                JOptionPane.showMessageDialog(null, "Passwords iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
+                                //listaP.get(i).setPassword(passwords);
+                            }
+                        //}
+                    //}
            }
         });
         
@@ -198,7 +263,7 @@ class Login extends JFrame{
     
     
     
-    public Login(){
+    public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
         
         this.setPreferredSize(new Dimension(200,300));
         this.setTitle("Login");
@@ -220,7 +285,15 @@ class Login extends JFrame{
         buttonLogin.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                Inscriçao Interface = new Inscriçao();
+                String passwords = new String(password.getPassword());
+                String nomeInterface = new String(nome.getText());
+                //for(int i=0; i<listaP.size() ; i++){
+                    //if(nomeInterface.equals(listaP.get(i))){
+                //if ((passwords.equals(listaP.password))){    
+                    Inscriçao_Convivio Interface = new Inscriçao_Convivio(listaC,listaL);
+                    //}
+                //}
+                //}
             }
         });
         
@@ -251,7 +324,7 @@ class Inicial extends JFrame{
     private final JButton buttonSai;
         
         
-    public Inicial(){
+    public Inicial(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         
         this.setPreferredSize(new Dimension(200,300));
         this.setTitle("Inicio");
@@ -264,7 +337,7 @@ class Inicial extends JFrame{
         buttonCria.addActionListener(new ActionListener(){
         @Override 
             public void actionPerformed(ActionEvent event){
-                Cria Interface = new Cria();
+                Cria Interface = new Cria(listaP);
             }
         
         });
@@ -273,7 +346,7 @@ class Inicial extends JFrame{
         buttonLogin.addActionListener(new ActionListener(){
         @Override 
             public void actionPerformed(ActionEvent event){
-                Login Interface = new Login();
+                Login Interface = new Login(listaC,listaL);
             }
         });
             
