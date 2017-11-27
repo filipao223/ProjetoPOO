@@ -21,12 +21,17 @@ public class ProjetoPOO {
     public static void main(String[] args) {
         
         ArrayList<Pessoa> comunidadeDEI = new ArrayList<>();
+        
+        ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+
         ArrayList<Local> listaLocais = new ArrayList<>();
         ArrayList<Convivio> listaConvivios = new ArrayList<>();
         ArrayList<Desporto> listaDesportos = new ArrayList<>();
         
         Scanner sc = new Scanner(System.in);
         String convEsc;
+        
+        Inicial Interface = new Inicial(listaConvivios,listaLocais,comunidadeDEI);
 
         //Lê dos ficheiros
         try{
@@ -183,6 +188,7 @@ public class ProjetoPOO {
         System.out.println("Convivios:");
         System.out.println(listaC);
     }
+        
     
     static Pessoa getPessoa(ArrayList<Pessoa> listaPessoas){
         System.out.println("Nome da pessoa?: ");
