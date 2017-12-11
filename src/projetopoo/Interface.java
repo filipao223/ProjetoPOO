@@ -236,10 +236,12 @@ class Login extends JFrame{
                     if(Objects.equals(nomeInterface,listaP.get(i).getNome())){
                         check = 1;
                         if (Objects.equals(listaP.get(i).getPassword(),passwords)){
+                            convivio.addPessoa(listaP.get(i));
                             Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
                         }
                         if (Objects.equals(listaP.get(i).getPassword(),null)){
                             listaP.get(i).setPassword(passwords);
+                            convivio.addPessoa(listaP.get(i));
                             Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
                         }
                         if (!Objects.equals(listaP.get(i).getPassword(),passwords)){
