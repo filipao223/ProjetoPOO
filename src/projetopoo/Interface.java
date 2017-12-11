@@ -152,7 +152,7 @@ class Login extends JFrame{
     private final JButton buttonSai;
     
     private final JComboBox combo;
-    private JList<String> list;
+    private final JComboBox combo2;
     
     Convivio convivio;
     
@@ -242,39 +242,25 @@ class Login extends JFrame{
         });
         
         label3 = new JLabel("Pessoas inscritas no convivio: "); this.add(label3);
+        Object[] listP = convivio.listaPessoas.toArray();
+        combo2 = new JComboBox(listP);                
         numPessoas = new JTextField(); this.add(numPessoas);
-        numPessoas.setText(Integer.toString(convivio.contPessoas)); //Pelo menos sempre um contador
+        numPessoas.setText(Integer.toString(convivio.contPessoas));
+        this.add(combo2);//Pelo menos sempre um contador
         
         //Atualiza o convivio e o contador sempre que o utilizador alterar a selecçao de convivio
         combo.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                combo2.removeAllItems();
                 convivio = (Convivio)combo.getSelectedItem();
                 numPessoas.setText(Integer.toString(convivio.contPessoas));
-              
-                DefaultListModel<String> model = new DefaultListModel<>();
-                list = new JList(model);
-                for(Pessoa pessoa:convivio.listaPessoas){
-                    model.addElement(pessoa.getNome());
-                }
+                 for(Pessoa pessoa:convivio.listaPessoas){
+                     combo2.addItem(pessoa.getNome());
+                 }
+            
             }
         });
-        
-        //Lista de pessoas
-        DefaultListModel<String> model = new DefaultListModel<>();
-                list = new JList(model);
-                for(Pessoa pessoa:convivio.listaPessoas){
-                    model.addElement(pessoa.getNome());
-             }
-        Object[] listP = convivio.listaPessoas.toArray();
-        list = new JList(listP); //data has type Object[]
-        list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setVisibleRowCount(-1);
-        
-        JScrollPane listScroller = new JScrollPane(list);
-        listScroller.setPreferredSize(new Dimension(250, 80));
-        this.add(listScroller);
         
         this.pack();
     }
