@@ -40,8 +40,6 @@ class Prof extends Pessoa{
         
         convInscrito = convivio;
 
-        System.out.print("Introduza password: ");
-        this.setPassword(sc.nextLine());
         return 1;
     }
     
