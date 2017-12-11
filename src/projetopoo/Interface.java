@@ -43,7 +43,7 @@ class Inscriçao_Convivio extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonEntrar.isSelected()){
-                    String local = ((Convivio)combo.getSelectedItem()).nome;
+                    Convivio convivio = ((Convivio)combo.getSelectedItem());
                     Login Interface = new Login(listaC,listaL,listaP,convivio);
                     buttonEntrar.setSelected(false);
                     
