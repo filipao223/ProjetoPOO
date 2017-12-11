@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 class Convivio {
     
-    private final String nome;
+    protected final String nome;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     protected ArrayList<Local> listaLocais = new ArrayList<>();
@@ -72,10 +72,6 @@ class Convivio {
             System.out.println("\nErro. Pessoa inexistente.");
             return 0;
         }
-        
-        System.out.print("Introduza password: ");
-        if(!login(p, sc.nextLine())) return 0;
-        
         //Verifica existencia do local
         if(checkLocal(l) != 1){
             System.out.println("1nErro. Local inexistente.");

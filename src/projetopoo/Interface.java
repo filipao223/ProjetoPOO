@@ -9,14 +9,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 
 class Inscriçao_Convivio extends JFrame{
     private final JCheckBox buttonInscrever;
+    private final JCheckBox buttonEntrar;
     private final JButton buttonSai;
     private final JComboBox combo;
     
-    public Inscriçao_Convivio(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
+    public Inscriçao_Convivio(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         this.setPreferredSize(new Dimension(400,400));
         this.setTitle("Inscrições Convívio");
         this.setLocation(100,100);
@@ -29,9 +31,21 @@ class Inscriçao_Convivio extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
-                    
-                    Inscriçao_Locais Interface = new Inscriçao_Locais(listaC,listaL);
+                    Convivio convivio = ((Convivio)combo.getSelectedItem());
+                    Login Interface = new Login(listaC,listaL,listaP,convivio);
                     buttonInscrever.setSelected(false);
+                    
+                }
+            }
+        });
+        buttonEntrar = new JCheckBox("Entrar");this.add(buttonEntrar);
+        buttonEntrar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                if(buttonEntrar.isSelected()){
+                    String local = ((Convivio)combo.getSelectedItem()).nome;
+                    Login Interface = new Login(listaC,listaL,listaP,convivio);
+                    buttonEntrar.setSelected(false);
                     
                 }
             }
@@ -64,7 +78,7 @@ class Inscriçao_Locais extends JFrame{
     private final JRadioButton Desporto;
     private final JComboBox combo;
     
-    public Inscriçao_Locais(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
+    public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         this.setPreferredSize(new Dimension(400,400));
         this.setTitle("Inscrições Locais");
         this.setLocation(100,100);
@@ -77,8 +91,13 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
-                    buttonInscrever.setSelected(false);
-                    
+                    for(int i=0; i<listaP.size() ; i++){
+                        if(Objects.equals(nomeInterface,listaP.get(i).getNome())){
+                            //addLocalToPessoa(listaP.get(i),((Local)combo.getSelectedItem())) ;
+                            System.out.println(listaP.get(i).listaLocais);
+                            buttonInscrever.setSelected(false);
+                        }
+                    }
                 }
             }
         });
@@ -175,82 +194,7 @@ class Inscriçao_Locais extends JFrame{
         this.pack();
     }
 }
-    
-class Cria extends JFrame{
-    private final JTextField nome;
-    private final JPasswordField password;
-    private final JPasswordField confirmapass;
-    private final JLabel label1;
-    private final JLabel label2;
-    private final JLabel label3;
-    private final JButton buttonCria;
-    private final JButton buttonLimpa;
-    private final JButton buttonSai;
-    
-    public Cria(ArrayList<Pessoa> listaP){
-        this.setPreferredSize(new Dimension(275,200));
-        this.setTitle("Criar Conta");
-        this.setLocation(100,100);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new FlowLayout());
-        
-        label1 = new JLabel("Nome"); this.add(label1);
-        nome = new JTextField(); this.add(nome);
-        nome.setPreferredSize(new Dimension(60,20));
-    
-        label2 = new JLabel("Password"); this.add(label2);
-        password = new JPasswordField(); this.add(password);
-        password.setPreferredSize(new Dimension(80,20));
-        
-        label3 = new JLabel("Confirma Password"); this.add(label3);
-        confirmapass = new JPasswordField(); this.add(confirmapass);
-        confirmapass.setPreferredSize(new Dimension(80,20));
-        
-        buttonCria = new JButton("Cria");this.add(buttonCria);
-        buttonCria.addActionListener(new ActionListener(){
-           @Override
-           public void actionPerformed(ActionEvent event){
-               
-                    String passwords = new String(password.getPassword());
-                    String confirmapassword = new String(confirmapass.getPassword());
-                    String nomeInterface = new String(nome.getText());
-                    
-                    //for(int i=0; i<listaP.size() ; i++){
-                        //if(nomeInterface.equals(listaP.get(i))){
-                            if ((passwords.equals(confirmapassword)) == false){
-                                JOptionPane.showMessageDialog(null, "Passwords não iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            if ((passwords.equals(confirmapassword))){
-                                JOptionPane.showMessageDialog(null, "Passwords iguais", "Erro " + "", JOptionPane.INFORMATION_MESSAGE);
-                                //listaP.get(i).setPassword(passwords);
-                            }
-                        //}
-                    //}
-           }
-        });
-        
-        buttonLimpa = new JButton("Limpa");this.add(buttonLimpa);
-        buttonLimpa.addActionListener(new ActionListener(){
-        @Override
-            public void actionPerformed(ActionEvent event){
-                    nome.setText("");
-                    password.setText("");
-                    confirmapass.setText("");
-            }
-        });
-        buttonSai = new JButton("Sai");this.add(buttonSai);
-        buttonSai.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent event){
-                dispose();
-            }
-    });
-        
-        this.pack();
-    }
-}
-
+  
 class Login extends JFrame{
     
     private final JTextField nome;
@@ -263,7 +207,7 @@ class Login extends JFrame{
     
     
     
-    public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL){
+    public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP,Convivio convivio){
         
         this.setPreferredSize(new Dimension(200,300));
         this.setTitle("Login");
@@ -287,13 +231,34 @@ class Login extends JFrame{
             public void actionPerformed(ActionEvent event){
                 String passwords = new String(password.getPassword());
                 String nomeInterface = new String(nome.getText());
-                //for(int i=0; i<listaP.size() ; i++){
-                    //if(nomeInterface.equals(listaP.get(i))){
-                //if ((passwords.equals(listaP.password))){    
-                    Inscriçao_Convivio Interface = new Inscriçao_Convivio(listaC,listaL);
-                    //}
-                //}
-                //}
+                int check = 0;
+                for(int i=0; i<listaP.size() ; i++){
+                    if(Objects.equals(nomeInterface,listaP.get(i).getNome())){
+                        check = 1;
+                        if (Objects.equals(listaP.get(i).getPassword(),passwords)){
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
+                        }
+                        if (Objects.equals(listaP.get(i).getPassword(),null)){
+                            listaP.get(i).setPassword(passwords);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
+                        }
+                        if (!Objects.equals(listaP.get(i).getPassword(),passwords)){
+                            JOptionPane.showMessageDialog(null, "Password Incorreta", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                    if(check == 0){
+                         JOptionPane.showMessageDialog(null, "Não se encontra a pessoa", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                    }
+                
+                    if(Objects.equals(nomeInterface,"")){
+                         JOptionPane.showMessageDialog(null, "Insira uma pessoa", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                
             }
         });
         
@@ -319,7 +284,6 @@ class Login extends JFrame{
     
 class Inicial extends JFrame{
         
-    private final JButton buttonCria;
     private final JButton buttonLogin;
     private final JButton buttonSai;
         
@@ -333,20 +297,11 @@ class Inicial extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
             
-        buttonCria = new JButton("Cria Conta");this.add(buttonCria);
-        buttonCria.addActionListener(new ActionListener(){
-        @Override 
-            public void actionPerformed(ActionEvent event){
-                Cria Interface = new Cria(listaP);
-            }
-        
-        });
-            
         buttonLogin = new JButton("Entrar na Conta");this.add(buttonLogin);
         buttonLogin.addActionListener(new ActionListener(){
         @Override 
             public void actionPerformed(ActionEvent event){
-                Login Interface = new Login(listaC,listaL);
+                Inscriçao_Convivio Interface = new Inscriçao_Convivio(listaC,listaL,listaP);
             }
         });
             
