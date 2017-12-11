@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 package projetopoo;
-
 /**
- *
- * @author filipe
- */
+* Classe de Desporto
+*@author Joao Mendes e Joao Motenegro
+*/
+
 public class Desporto {
     private final String tipo;
-
     public Desporto(String tipo) {
         this.tipo = tipo;
     }

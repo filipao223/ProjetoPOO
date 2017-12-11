@@ -14,7 +14,8 @@ import java.util.Scanner;
  */
 class Aluno extends Pessoa{
 
-    private String nome, perfil, password, tipo;
+    private final String nome, perfil, tipo;
+    private String password;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
     private final int maxLocais = 5;
@@ -39,8 +40,6 @@ class Aluno extends Pessoa{
         else{
             convInscrito = convivio;
 
-            System.out.print("Introduza password: ");
-            this.setPassword(sc.nextLine());
             return 1;
         }
     }
@@ -81,12 +80,15 @@ class Aluno extends Pessoa{
         return perfil;
     }
 
-    private String getPassword() {
+    @Override
+    protected String getPassword() {
         return password;
     }
 
-    private void setPassword(String password) {
+    @Override
+    protected int setPassword(String password) {
         this.password = password;
+        return 1;
     }
     
     @Override
