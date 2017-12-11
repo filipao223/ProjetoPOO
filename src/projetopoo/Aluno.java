@@ -14,7 +14,8 @@ import java.util.Scanner;
  */
 class Aluno extends Pessoa{
 
-    private String nome, perfil, password, tipo;
+    private final String nome, perfil, tipo;
+    private String password;
     
     protected ArrayList<Local> listaLocais = new ArrayList<>();
     private final int maxLocais = 5;

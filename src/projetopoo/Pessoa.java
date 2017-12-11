@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 abstract class Pessoa{
     
-    protected ArrayList<Local> listaLocais;
+    ArrayList<Local> listaLocais;
     abstract int addLocal(Local local);
     abstract String getNome();
     abstract String getPerfil();
@@ -21,4 +21,5 @@ abstract class Pessoa{
     abstract ArrayList<Local> getLocais();
     abstract String getPassword();
     abstract int setPassword(String password);
+    abstract int inscricao(Convivio convivio);
 }

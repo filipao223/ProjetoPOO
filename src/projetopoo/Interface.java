@@ -12,62 +12,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.JOptionPane;
 
-class Inscriçao_Convivio extends JFrame{
-    private final JCheckBox buttonInscrever;
-    private final JCheckBox buttonEntrar;
-    private final JButton buttonSai;
-    private final JComboBox combo;
-    
-    public Inscriçao_Convivio(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
-        this.setPreferredSize(new Dimension(400,400));
-        this.setTitle("Inscrições Convívio");
-        this.setLocation(100,100);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new FlowLayout());
-        
-        buttonInscrever = new JCheckBox("Inscrever");this.add(buttonInscrever);
-        buttonInscrever.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent event){
-                if(buttonInscrever.isSelected()){
-                    Convivio convivio = ((Convivio)combo.getSelectedItem());
-                    Login Interface = new Login(listaC,listaL,listaP,convivio);
-                    buttonInscrever.setSelected(false);
-                    
-                }
-            }
-        });
-        buttonEntrar = new JCheckBox("Entrar");this.add(buttonEntrar);
-        buttonEntrar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent event){
-                if(buttonEntrar.isSelected()){
-                    Convivio convivio = ((Convivio)combo.getSelectedItem());
-                    Login Interface = new Login(listaC,listaL,listaP,convivio);
-                    buttonEntrar.setSelected(false);
-                    
-                }
-            }
-        });
-        
-        buttonSai = new JButton("Sai");this.add(buttonSai);
-        buttonSai.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent event){
-                dispose();
-            }
-    });
-        
-        combo = new JComboBox(listaC.toArray());
-                        
-        this.add(combo);
-        
-        this.pack();
-    }
-    
-}
-
 
 class Inscriçao_Locais extends JFrame{
     private final JCheckBox buttonInscrever;
@@ -205,9 +149,12 @@ class Login extends JFrame{
     private final JButton buttonLimpa;
     private final JButton buttonSai;
     
+    private final JComboBox combo;
+    
+    Convivio convivio;
     
     
-    public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP,Convivio convivio){
+    public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         
         this.setPreferredSize(new Dimension(200,300));
         this.setTitle("Login");
@@ -216,51 +163,62 @@ class Login extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
         
+        //Lista de convivios
+        combo = new JComboBox(listaC.toArray());                
+        this.add(combo);
+        convivio = (Convivio)combo.getSelectedItem();
+        
+        //Label do nome
         label1 = new JLabel("Nome"); this.add(label1);
         nome = new JTextField(); this.add(nome);
         nome.setPreferredSize(new Dimension(60,20));
     
-        
+        //Label da password
         label2 = new JLabel("Password"); this.add(label2);
         password = new JPasswordField(); this.add(password);
         password.setPreferredSize(new Dimension(80,20));
         
+        //Botao login
         buttonLogin = new JButton("Login");this.add(buttonLogin);
         buttonLogin.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                String passwords = new String(password.getPassword());
-                String nomeInterface = new String(nome.getText());
-                int check = 0;
-                for(int i=0; i<listaP.size() ; i++){
-                    if(Objects.equals(nomeInterface,listaP.get(i).getNome())){
-                        check = 1;
-                        if (Objects.equals(listaP.get(i).getPassword(),passwords)){
-                            convivio.addPessoa(listaP.get(i));
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
+                String passwordInput = new String(password.getPassword()); //Recebe pass da caixa
+                String nomeInput = nome.getText(); //Recebe nome da caixa
+                int checkPessoaExist = 0;
+                for(Pessoa pessoa:listaP){
+                    if(Objects.equals(nomeInput, pessoa.getNome())){
+                        //Nome introduzido existe na lista
+                        checkPessoaExist = 1;
+                        if (Objects.equals(pessoa.getPassword(), passwordInput)){
+                            //Pessoa já está inscrita
+                            System.out.println("Pessoa já inscrita em -" + convivio.getNome() + "-.");
+                            convivio.addPessoa(pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL,listaP);                  
                         }
-                        if (Objects.equals(listaP.get(i).getPassword(),null)){
-                            listaP.get(i).setPassword(passwords);
-                            convivio.addPessoa(listaP.get(i));
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInterface,convivio,listaC,listaL,listaP);
+                        if (Objects.equals(pessoa.getPassword(),null)){
+                            //Pessoa ainda não está inscrita
+                            System.out.println("Pessoa ainda não inscrita em -" + convivio.getNome() + "-. Inscrita automaticamente.");
+                            pessoa.setPassword(passwordInput); //Password da pessoa é agora a introduzida na caixa
+                            convivio.addPessoa(pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL,listaP);
+                            JOptionPane.showMessageDialog(null, "Ainda não se encontra inscrito. Inscrito automaticamente", "Inscrito", JOptionPane.INFORMATION_MESSAGE);
                         }
-                        if (!Objects.equals(listaP.get(i).getPassword(),passwords)){
-                            JOptionPane.showMessageDialog(null, "Password Incorreta", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
+                        if (!Objects.equals(pessoa.getPassword(),passwordInput)){
+                            //Password errada
+                            JOptionPane.showMessageDialog(null, "Password Incorreta", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
-                    if(check == 0){
-                         JOptionPane.showMessageDialog(null, "Não se encontra a pessoa", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                    }
-                
-                    if(Objects.equals(nomeInterface,"")){
-                         JOptionPane.showMessageDialog(null, "Insira uma pessoa", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                    }
-                    
-                
+                if(checkPessoaExist == 0){
+                    //Não foi encontrada pessoa
+                     JOptionPane.showMessageDialog(null, "Não se encontra a pessoa", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                if(Objects.equals(nomeInput,"")){
+                    //Não foi introduzido nome
+                     JOptionPane.showMessageDialog(null, "Insira uma pessoa", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         
@@ -303,7 +261,7 @@ class Inicial extends JFrame{
         buttonLogin.addActionListener(new ActionListener(){
         @Override 
             public void actionPerformed(ActionEvent event){
-                Inscriçao_Convivio Interface = new Inscriçao_Convivio(listaC,listaL,listaP);
+                Login loginFrame = new Login(listaC, listaL, listaP);
             }
         });
             
