@@ -5,6 +5,8 @@
  */
 package projetopoo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author filipe
@@ -12,4 +14,9 @@ package projetopoo;
 abstract class Pessoa{
     
     abstract int inscricao(Convivio convivio);
+    abstract int addLocal(Local local);
+    abstract String getNome();
+    abstract String getPerfil();
+    abstract String getTipo();
+    abstract ArrayList<Local> getLocais();
 }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 class Bar extends Local{
 
-    private int custoMin, contGuestList = 0;
-    private final int maxGuestList, lotacao;
+    private int contGuestList = 0;
+    private final int maxGuestList, lotacao, custoMin;
     private final String coordGPS;
   
     protected Convivio convInscrito;    
@@ -26,9 +26,10 @@ class Bar extends Local{
         this.coordGPS = coordGPS;
         this.lotacao = lotacao;
         this.custoMin = custoMin;
-        this.maxGuestList = (int)(120*(double)maxPercentage);
+        this.maxGuestList = (int)(120*(double)(maxPercentage/100.0));
     }
     
+    @Override
     protected int addGuestList(Pessoa p){
         if(contGuestList>=maxGuestList){
             System.out.println("Erro.Numero maximo de pessoas na guest list.");
@@ -67,24 +68,33 @@ class Bar extends Local{
         return 1;
     }
     
+    @Override
     public int getLotacao() {
         return lotacao;
     }
-
+    
+    @Override
     public int getCustoMin() {
         return custoMin;
     }
     
-    public void setCustoMin(int custoMin){
-        this.custoMin = custoMin;
-    }
-    
+    @Override
     public int getMaxGuestList() {
         return maxGuestList;
     }
     
     @Override
+    public String getCoordGPS(){
+        return this.coordGPS;
+    }
+    
+    @Override
+    public ArrayList<Pessoa> getPessoas(){
+        return this.listaPessoas;
+    }
+    
+    @Override
     public String toString(){
-        return this.getClass().getName() + ", lotacao: " + this.lotacao + ", Num.Max. Guest list: " + this.maxGuestList + ", Custo min: " + this.custoMin;
+        return this.getClass().getSimpleName() + ", lotacao: " + this.lotacao + ", Num.Max. Guest list: " + this.maxGuestList + ", Custo min: " + this.custoMin;
     }
 }
