@@ -40,8 +40,6 @@ class Prof extends Pessoa{
         
         convInscrito = convivio;
 
-        System.out.print("Introduza password: ");
-        this.setPassword(sc.nextLine());
         return 1;
     }
     
@@ -76,12 +74,15 @@ class Prof extends Pessoa{
         return tipo;
     }
     
-    private String getPassword() {
+    @Override
+    protected String getPassword() {
         return password;
     }
     
-    private void setPassword(String password) {
+    @Override
+    protected int setPassword(String password) {
         this.password = password;
+        return 1;
     }
     
     @Override
