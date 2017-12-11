@@ -152,6 +152,7 @@ class Login extends JFrame{
     private final JButton buttonSai;
     
     private final JComboBox combo;
+    private JList<String> list;
     
     Convivio convivio;
     
@@ -236,7 +237,7 @@ class Login extends JFrame{
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
-                dispose();
+                System.exit(0);
             }
         });
         
@@ -250,8 +251,30 @@ class Login extends JFrame{
             public void actionPerformed(ActionEvent e){
                 convivio = (Convivio)combo.getSelectedItem();
                 numPessoas.setText(Integer.toString(convivio.contPessoas));
+              
+                DefaultListModel<String> model = new DefaultListModel<>();
+                list = new JList(model);
+                for(Pessoa pessoa:convivio.listaPessoas){
+                    model.addElement(pessoa.getNome());
+                }
             }
         });
+        
+        //Lista de pessoas
+        DefaultListModel<String> model = new DefaultListModel<>();
+                list = new JList(model);
+                for(Pessoa pessoa:convivio.listaPessoas){
+                    model.addElement(pessoa.getNome());
+             }
+        Object[] listP = convivio.listaPessoas.toArray();
+        list = new JList(listP); //data has type Object[]
+        list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list.setLayoutOrientation(JList.VERTICAL);
+        list.setVisibleRowCount(-1);
+        
+        JScrollPane listScroller = new JScrollPane(list);
+        listScroller.setPreferredSize(new Dimension(250, 80));
+        this.add(listScroller);
         
         this.pack();
     }
@@ -277,6 +300,7 @@ class Inicial extends JFrame{
         @Override 
             public void actionPerformed(ActionEvent event){
                 Login loginFrame = new Login(listaC, listaL, listaP);
+                dispose();
             }
         });
             
