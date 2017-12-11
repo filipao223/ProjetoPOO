@@ -15,6 +15,7 @@ import java.util.Scanner;
 class Convivio {
     
     protected final String nome;
+    protected int contPessoas = 0;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     protected ArrayList<Local> listaLocais = new ArrayList<>();
@@ -42,6 +43,8 @@ class Convivio {
             this.listaPessoas.add(p);
             System.out.println("\nPessoa adicionada ao convivio!");
         }
+        
+        contPessoas+=1;
         
         return 1;
     }

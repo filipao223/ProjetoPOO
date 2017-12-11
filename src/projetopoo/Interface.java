@@ -142,9 +142,11 @@ class Inscriçao_Locais extends JFrame{
 class Login extends JFrame{
     
     private final JTextField nome;
+    private final JTextField numPessoas;
     private final JPasswordField password;
     private final JLabel label1;
     private final JLabel label2;
+    private final JLabel label3;
     private final JButton buttonLogin;
     private final JButton buttonLimpa;
     private final JButton buttonSai;
@@ -156,7 +158,7 @@ class Login extends JFrame{
     
     public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         
-        this.setPreferredSize(new Dimension(200,300));
+        this.setPreferredSize(new Dimension(420,300));
         this.setTitle("Login");
         this.setLocation(100,100);
         this.setVisible(true);
@@ -166,7 +168,7 @@ class Login extends JFrame{
         //Lista de convivios
         combo = new JComboBox(listaC.toArray());                
         this.add(combo);
-        convivio = (Convivio)combo.getSelectedItem();
+        convivio = (Convivio)combo.getSelectedItem(); //Pelo menos sempre um convivio escolhido
         
         //Label do nome
         label1 = new JLabel("Nome"); this.add(label1);
@@ -222,7 +224,7 @@ class Login extends JFrame{
             }
         });
         
-        buttonLimpa = new JButton("Limpa");this.add(buttonLimpa);
+        buttonLimpa = new JButton("Limpa");this.add(buttonLimpa); //Botão para limpar as caixas de texto
         buttonLimpa.addActionListener(new ActionListener(){
         @Override
             public void actionPerformed(ActionEvent event){
@@ -230,13 +232,26 @@ class Login extends JFrame{
                     password.setText("");           
             }
         });
-        buttonSai = new JButton("Sai");this.add(buttonSai);
+        buttonSai = new JButton("Sai");this.add(buttonSai); //Botão para voltar à frame inicial
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
                 dispose();
             }
-    });
+        });
+        
+        label3 = new JLabel("Pessoas inscritas no convivio: "); this.add(label3);
+        numPessoas = new JTextField(); this.add(numPessoas);
+        numPessoas.setText(Integer.toString(convivio.contPessoas)); //Pelo menos sempre um contador
+        
+        //Atualiza o convivio e o contador sempre que o utilizador alterar a selecçao de convivio
+        combo.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                convivio = (Convivio)combo.getSelectedItem();
+                numPessoas.setText(Integer.toString(convivio.contPessoas));
+            }
+        });
         
         this.pack();
     }
