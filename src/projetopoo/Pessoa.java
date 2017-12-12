@@ -19,6 +19,7 @@ abstract class Pessoa{
     abstract String getPerfil();
     abstract String getTipo();
     abstract ArrayList<Local> getLocais();
+    abstract void addToListaLocal(Local l);
     abstract String getPassword();
     abstract int setPassword(String password);
     abstract int inscricao(Convivio convivio);

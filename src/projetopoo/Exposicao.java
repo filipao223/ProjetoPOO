@@ -54,6 +54,11 @@ class Exposicao extends Local{
     }
     
     @Override
+    public String getDescricao(){
+        return this.forma + "; Preço: " + this.custoIngresso;
+    }
+    
+    @Override
     public String getForma() {
         return forma;
     }

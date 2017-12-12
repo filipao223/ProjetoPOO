@@ -97,4 +97,9 @@ class Bar extends Local{
     public String toString(){
         return this.getClass().getSimpleName() + ", lotacao: " + this.lotacao + ", Num.Max. Guest list: " + this.maxGuestList + ", Custo min: " + this.custoMin;
     }
+    
+    @Override
+    public String getDescricao(){
+        return "Local: " + this.coordGPS + " Consumo minimo: " + this.custoMin;
+    }
 }

@@ -55,4 +55,9 @@ class ParqueDesporto extends Parque{
     public String toString(){
         return this.getClass().getSimpleName() + ", coordenadas: " + this.getCoordGPS();
     }
+    
+    @Override
+    public String getDescricao(){
+        return "Coordenadas: " + this.coordGPS;
+    }
 }

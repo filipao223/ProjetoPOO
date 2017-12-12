@@ -66,4 +66,9 @@ class Jardim extends Parque{
     public String toString(){
         return this.getClass().getSimpleName() + ", area: " + area;
     }
+    
+    @Override
+    public String getDescricao(){
+        return "Coordenadas: " + this.coordGPS;
+    }
 }

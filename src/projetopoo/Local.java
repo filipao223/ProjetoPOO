@@ -16,6 +16,7 @@ abstract class Local{
     abstract int addPessoa(Pessoa p);
     abstract int receita();
     abstract String getCoordGPS();
+    abstract String getDescricao();
     String getForma(){
         return "";
     }

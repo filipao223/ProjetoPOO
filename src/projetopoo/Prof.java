@@ -17,7 +17,7 @@ class Prof extends Pessoa{
     private final String nome, perfil, tipo;
     private String password;
     
-    protected ArrayList<Local> listaLocais = new ArrayList<>();
+    private ArrayList<Local> listaLocais = new ArrayList<>();
     private int contLocais = 0;
     private final int maxLocais = 5;
     
@@ -93,6 +93,11 @@ class Prof extends Pessoa{
     @Override
     public String getNome(){
         return this.nome;
+    }
+    
+    @Override
+    public void addToListaLocal(Local l){
+        this.listaLocais.add(l);
     }
     
     @Override

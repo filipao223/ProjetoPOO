@@ -16,14 +16,16 @@ import javax.swing.JOptionPane;
 class Inscriçao_Locais extends JFrame{
     private final JCheckBox buttonInscrever;
     private final JButton buttonSai;
+    private final JButton buttonLocalInscrito;
     private final JRadioButton Exposições;
     private final JRadioButton Bares;
     private final JRadioButton Jardins;
     private final JRadioButton Desporto;
     private final JComboBox combo;
+    private final JComboBox comboLocalPessoa;
     
-    public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
-        this.setPreferredSize(new Dimension(400,400));
+    public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
+        this.setPreferredSize(new Dimension(600,400));
         this.setTitle("Inscrições Locais");
         this.setLocation(100,100);
         this.setVisible(true);
@@ -35,13 +37,9 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
-                    for(int i=0; i<listaP.size() ; i++){
-                        if(Objects.equals(nomeInterface,listaP.get(i).getNome())){
-                            //addLocalToPessoa(listaP.get(i),((Local)combo.getSelectedItem())) ;
-                            System.out.println(listaP.get(i).listaLocais);
-                            buttonInscrever.setSelected(false);
-                        }
-                    }
+                    convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
+                    System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
+                    buttonInscrever.setSelected(false);
                 }
             }
         });
@@ -64,14 +62,11 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Exposições.isSelected()){
                     combo.removeAllItems();
-                    for(int i=0; i<listaL.size() ; i++){
-                        if (listaL.get(i).getClass() == Exposicao.class) {
-                            combo.addItem(listaL.get(i));
+                    for(Local local:listaL){
+                        if (local.getClass() == Exposicao.class) {
+                            combo.addItem(local);
                         }
-                        
                     }
-                    
-                    
                 }
             }
         });
@@ -86,13 +81,11 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Bares.isSelected()){
                     combo.removeAllItems();
-                    for(int i=0; i<listaL.size() ; i++){
-                        if (listaL.get(i).getClass() == Bar.class) {
-                            combo.addItem(listaL.get(i));
+                    for(Local local:listaL){
+                        if (local.getClass() == Bar.class) {
+                            combo.addItem(local);
                         }
-                        
                     }
-                    
                 }
             }
         });
@@ -106,11 +99,10 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Jardins.isSelected()){
                     combo.removeAllItems();
-                    for(int i=0; i<listaL.size() ; i++){
-                        if (listaL.get(i).getClass() == ParqueDesporto.class) {
-                            combo.addItem(listaL.get(i));
+                    for(Local local:listaL){
+                        if (local.getClass() == Jardim.class) {
+                            combo.addItem(local);
                         }
-                        
                     }
                 }
             }
@@ -124,9 +116,9 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Desporto.isSelected()){
                     combo.removeAllItems();
-                    for(int i=0; i<listaL.size() ; i++){
-                        if (listaL.get(i).getClass() == ParqueDesporto.class) {
-                            combo.addItem(listaL.get(i));
+                    for(Local local:listaL){
+                        if (local.getClass() == ParqueDesporto.class) {
+                            combo.addItem(local);
                         }
                     }
                 }
@@ -134,6 +126,18 @@ class Inscriçao_Locais extends JFrame{
         });
         group.add(Desporto);
         this.add(Desporto);
+        
+        comboLocalPessoa = new JComboBox(new String[]{}); this.add(comboLocalPessoa);
+        buttonLocalInscrito = new JButton("Locais Inscritos"); this.add(buttonLocalInscrito);
+        buttonLocalInscrito.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                comboLocalPessoa.removeAllItems();
+                for(Local local:pessoa.getLocais()){
+                    comboLocalPessoa.addItem(local);
+                }
+            }
+        });
         
         this.pack();
     }
@@ -197,14 +201,14 @@ class Login extends JFrame{
                             //Pessoa já está inscrita
                             System.out.println("Pessoa já inscrita em -" + convivio.getNome() + "-.");
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL,listaP);                  
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);                  
                         }
                         if (Objects.equals(pessoa.getPassword(),null)){
                             //Pessoa ainda não está inscrita
                             System.out.println("Pessoa ainda não inscrita em -" + convivio.getNome() + "-. Inscrita automaticamente.");
                             pessoa.setPassword(passwordInput); //Password da pessoa é agora a introduzida na caixa
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL,listaP);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);
                             JOptionPane.showMessageDialog(null, "Ainda não se encontra inscrito. Inscrito automaticamente", "Inscrito", JOptionPane.INFORMATION_MESSAGE);
                         }
                         if (!Objects.equals(pessoa.getPassword(),passwordInput)){

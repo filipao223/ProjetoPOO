@@ -102,6 +102,11 @@ class Aluno extends Pessoa{
     }
     
     @Override
+    public void addToListaLocal(Local l){
+        this.listaLocais.add(l);
+    }
+    
+    @Override
     public String toString(){
         return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", curso: " + this.getTipo();
     }
