@@ -55,12 +55,12 @@ class ParqueDesporto extends Parque{
     
     @Override
     public String toString(){
-        return this.getClass().getSimpleName() + ", coordenadas: " + this.getCoordGPS();
+        return "GPS:" + this.coordGPS;
     }
     
     @Override
     public String getDescricao(){
-        return "Coordenadas: " + this.coordGPS;
+        return this.getClass().getSimpleName() + ", coordenadas: " + this.getCoordGPS();
     }
     @Override
     public int getNInscritos(){

@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 abstract class Pessoa{
     
-    ArrayList<Local> listaLocais;
     abstract int addLocal(Local local);
     abstract String getNome();
     abstract String getPerfil();

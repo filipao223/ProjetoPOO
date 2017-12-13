@@ -97,15 +97,19 @@ class Bar extends Local{
     
     @Override
     public String toString(){
-        return this.getClass().getSimpleName() + ", lotacao: " + this.lotacao + ", Num.Max. Guest list: " + this.maxGuestList + ", Custo min: " + this.custoMin;
+        return "GPS:" + this.coordGPS + " Preço:" + this.custoMin + "€" + "Guests:" + this.maxGuestList;
     }
     
     @Override
     public String getDescricao(){
-        return "Local: " + this.coordGPS + " Consumo minimo: " + this.custoMin;
+        return this.getClass().getSimpleName() + ", lotacao: " + this.lotacao + ", Num.Max. Guest list: " + this.maxGuestList + ", Custo min: " + this.custoMin;
     }
     @Override
     public int getNInscritos(){
         return this.nInscritos;
+    }
+    @Override
+    public ArrayList<Pessoa> getGuestList(){
+        return this.guestList;
     }
 }

@@ -52,12 +52,12 @@ class Exposicao extends Local{
     
     @Override
     public String toString(){
-        return this.getClass().getSimpleName() + ", forma: " + this.forma + ", Coordenadas: " + this.coordGPS + ", Custo: " + this.custoIngresso;
+        return this.forma + " Preço:" + this.custoIngresso + "€";
     }
     
     @Override
     public String getDescricao(){
-        return this.forma + "; Preço: " + this.custoIngresso;
+        return this.getClass().getSimpleName() + ", forma: " + this.forma + ", Coordenadas: " + this.coordGPS + ", Custo: " + this.custoIngresso;
     }
     
     @Override

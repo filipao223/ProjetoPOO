@@ -42,6 +42,9 @@ abstract class Local{
     String getArea(){
         return "";
     }
+    ArrayList<Pessoa> getGuestList(){
+        return null;
+    }
     abstract ArrayList<Pessoa> getPessoas();
 }
 

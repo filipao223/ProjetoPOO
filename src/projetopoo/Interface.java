@@ -26,7 +26,7 @@ class Inscriçao_Locais extends JFrame{
     private final JComboBox comboGuestList;
     
     public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
-        this.setPreferredSize(new Dimension(600,400));
+        this.setPreferredSize(new Dimension(800,350));
         this.setTitle("Inscrições Locais");
         this.setLocation(100,100);
         this.setVisible(true);
@@ -40,6 +40,7 @@ class Inscriçao_Locais extends JFrame{
                 if(buttonInscrever.isSelected()){
                     if((Local)combo.getSelectedItem() instanceof Bar){
                         if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
+                            convivio.addLocalToPessoa(pessoa, (Bar)combo.getSelectedItem());
                             convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
                         }
@@ -64,7 +65,7 @@ class Inscriçao_Locais extends JFrame{
                 dispose();
             }
     });
-        combo = new JComboBox(new String[]{"...","..."});
+        combo = new JComboBox(new String[]{});
                         
         this.add(combo);
         
@@ -74,6 +75,7 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if (Exposições.isSelected()){
+                    buttonGuestList.setVisible(false);
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Exposicao.class) {
@@ -93,6 +95,7 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if (Bares.isSelected()){
+                    buttonGuestList.setVisible(true);
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Bar.class) {
@@ -111,6 +114,7 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if (Jardins.isSelected()){
+                    buttonGuestList.setVisible(false);
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Jardim.class) {
@@ -128,6 +132,7 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if (Desporto.isSelected()){
+                    buttonGuestList.setVisible(false);
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == ParqueDesporto.class) {
@@ -154,15 +159,16 @@ class Inscriçao_Locais extends JFrame{
         
         
         comboGuestList = new JComboBox(new String[] {}); this.add(comboGuestList);
-        buttonGuestList = new JButton("GuestList do Bar"); this.add(buttonLocalInscrito);
+        buttonGuestList = new JButton("GuestList do Bar"); this.add(buttonGuestList);
+        buttonGuestList.setVisible(false);
         buttonGuestList.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
                 comboGuestList.removeAllItems();
                 if((Local)combo.getSelectedItem() instanceof Bar){
-                    /*for(Pessoa pessoa: combo.getSelectedItem()){
+                    for(Pessoa pessoa: ((Local)combo.getSelectedItem()).getGuestList()){
                         comboGuestList.addItem(pessoa);
-                    }*/
+                    }
                 }
             }
         });

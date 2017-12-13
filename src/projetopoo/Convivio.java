@@ -97,7 +97,7 @@ class Convivio {
             System.out.println("1nErro. Local inexistente.");
             return 0;
         }
-        p.addGuestList(l);
+        l.addGuestList(p);
         
         return 1;
     }
