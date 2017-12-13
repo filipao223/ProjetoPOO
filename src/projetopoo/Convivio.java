@@ -86,6 +86,22 @@ class Convivio {
         return 1;
     }
     
+    protected int addGuestListToPessoa(Pessoa p,Local l){
+        //Verifica existencia da pessoa
+        if(checkPessoa(p) != 1){
+            System.out.println("\nErro. Pessoa inexistente.");
+            return 0;
+        }
+        //Verifica existencia do local
+        if(checkLocal(l) != 1){
+            System.out.println("1nErro. Local inexistente.");
+            return 0;
+        }
+        p.addGuestList(l);
+        
+        return 1;
+    }
+    
     private boolean login(Pessoa p, String pw){
         return true;
     }
