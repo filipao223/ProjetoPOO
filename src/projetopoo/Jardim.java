@@ -16,6 +16,7 @@ class Jardim extends Parque{
     private final String coordGPS;
     private final String area;
     protected Convivio convInscrito;
+    private int nInscritos=0;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
@@ -34,6 +35,7 @@ class Jardim extends Parque{
         }
         
         listaPessoas.add(p);
+        this.nInscritos++;
         return 1;
     }
     
@@ -70,5 +72,9 @@ class Jardim extends Parque{
     @Override
     public String getDescricao(){
         return "Coordenadas: " + this.coordGPS;
+    }
+    @Override
+    public int getNInscritos(){
+        return this.nInscritos;
     }
 }

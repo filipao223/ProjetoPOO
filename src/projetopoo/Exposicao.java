@@ -16,6 +16,7 @@ class Exposicao extends Local{
     private final String forma, coordGPS;
     private final int custoIngresso;
     protected Convivio convivioInscrito;
+    private int nInscritos=0;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
@@ -35,6 +36,7 @@ class Exposicao extends Local{
         }
         
         listaPessoas.add(p);
+        this.nInscritos++;
         return 1;
     }
     
@@ -71,5 +73,9 @@ class Exposicao extends Local{
     @Override
     public ArrayList<Pessoa> getPessoas(){
         return this.listaPessoas;
+    }
+    @Override
+    public int getNInscritos(){
+        return this.nInscritos;
     }
 }

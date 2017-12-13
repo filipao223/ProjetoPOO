@@ -16,6 +16,7 @@ class ParqueDesporto extends Parque{
     protected ArrayList<Desporto> listaDesportos = new ArrayList<>();
     protected Convivio convInscrito;
     private final String coordGPS;
+    private int nInscritos=0;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
@@ -33,6 +34,7 @@ class ParqueDesporto extends Parque{
         }
         
         listaPessoas.add(p);
+        this.nInscritos++;
         return 1;
     }
     
@@ -59,5 +61,9 @@ class ParqueDesporto extends Parque{
     @Override
     public String getDescricao(){
         return "Coordenadas: " + this.coordGPS;
+    }
+    @Override
+    public int getNInscritos(){
+        return this.nInscritos;
     }
 }

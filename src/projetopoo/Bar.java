@@ -16,6 +16,7 @@ class Bar extends Local{
     private int contGuestList = 0;
     private final int maxGuestList, lotacao, custoMin;
     private final String coordGPS;
+    private int nInscritos=0;
   
     protected Convivio convInscrito;    
 
@@ -60,6 +61,7 @@ class Bar extends Local{
         }
         
         listaPessoas.add(p);
+        this.nInscritos++;
         return 1;
     }
     
@@ -101,5 +103,9 @@ class Bar extends Local{
     @Override
     public String getDescricao(){
         return "Local: " + this.coordGPS + " Consumo minimo: " + this.custoMin;
+    }
+    @Override
+    public int getNInscritos(){
+        return this.nInscritos;
     }
 }
