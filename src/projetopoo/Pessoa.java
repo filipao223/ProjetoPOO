@@ -15,6 +15,7 @@ abstract class Pessoa{
     
     ArrayList<Local> listaLocais;
     abstract int addLocal(Local local);
+    abstract int addGuestList(Local local);
     abstract String getNome();
     abstract String getPerfil();
     abstract String getTipo();
