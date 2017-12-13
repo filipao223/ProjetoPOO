@@ -8,8 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 
@@ -199,16 +198,42 @@ class Login extends JFrame{
                         checkPessoaExist = 1;
                         if (Objects.equals(pessoa.getPassword(), passwordInput)){
                             //Pessoa já está inscrita
+                            combo.removeAllItems();
                             System.out.println("Pessoa já inscrita em -" + convivio.getNome() + "-.");
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);                  
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);
+                            for (int i = 0; i < listaC.size() - 1; i++)
+                            {
+                                int indice = i;
+                                for (int j = i + 1; j < listaC.size(); j++)
+                                    if (listaC.get(j).contPessoas < listaC.get(indice).contPessoas){ 
+                                        indice = j;
+                                    }
+
+                                Convivio MenosPessoas = listaC.get(indice);  
+                                listaC.set(indice, listaC.get(i));
+                                listaC.set(indice, MenosPessoas);
+                            }
                         }
                         if (Objects.equals(pessoa.getPassword(),null)){
                             //Pessoa ainda não está inscrita
+                            combo.removeAllItems();
                             System.out.println("Pessoa ainda não inscrita em -" + convivio.getNome() + "-. Inscrita automaticamente.");
                             pessoa.setPassword(passwordInput); //Password da pessoa é agora a introduzida na caixa
                             convivio.addPessoa(pessoa);
                             Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);
+                            for (int i = 0; i < listaC.size() - 1; i++)
+                            {
+                                int indice = i;
+                                for (int j = i + 1; j < listaC.size(); j++)
+                                    if (listaC.get(j).contPessoas < listaC.get(indice).contPessoas){ 
+                                        indice = j;
+                                    }
+
+                                Convivio MenosPessoas = listaC.get(indice);  
+                                listaC.set(indice, listaC.get(i));
+                                listaC.set(indice, MenosPessoas);
+                            }
                             JOptionPane.showMessageDialog(null, "Ainda não se encontra inscrito. Inscrito automaticamente", "Inscrito", JOptionPane.INFORMATION_MESSAGE);
                         }
                         if (!Objects.equals(pessoa.getPassword(),passwordInput)){
