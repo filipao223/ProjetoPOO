@@ -65,28 +65,6 @@ class Func extends Pessoa{
         return 1;
     }
     
-    @Override
-    protected int addGuestList(Local local){
-        if(this.contLocais>=this.maxLocais){
-            System.out.println("\nErro. Numero maximo de locais incritos atingido.");
-            return 0;
-        }
-        
-        for(Local l:this.listaLocais){
-            if(local == l){
-                System.out.println("\nErro. Pessoa já está inscrita neste local.");
-                return 0;
-            }
-        }
-        
-        this.listaLocais.add(local);
-        local.addGuestList(this);
-        this.incrContLocais();
-        System.out.println("Pessoa inscrita em local(GuestList).");
-        
-        return 1;
-    }
-    
     private void incrContLocais(){
         this.contLocais++;
     }

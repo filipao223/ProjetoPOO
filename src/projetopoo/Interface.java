@@ -16,14 +16,12 @@ class Inscriçao_Locais extends JFrame{
     private final JCheckBox buttonInscrever;
     private final JButton buttonSai;
     private final JButton buttonLocalInscrito;
-    private final JButton buttonGuestList;
     private final JRadioButton Exposições;
     private final JRadioButton Bares;
     private final JRadioButton Jardins;
     private final JRadioButton Desporto;
     private final JComboBox combo;
     private final JComboBox comboLocalPessoa;
-    private final JComboBox comboGuestList;
     
     public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
         this.setPreferredSize(new Dimension(600,400));
@@ -38,21 +36,9 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
-                    if((Local)combo.getSelectedItem() instanceof Bar){
-                        if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
-                            convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
-                            buttonInscrever.setSelected(false);
-                        }
-                        else{
-                            convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
-                            buttonInscrever.setSelected(false);
-                        }
-                    }
-                    else{
                     convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
                     System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
                     buttonInscrever.setSelected(false);
-                    }
                 }
             }
         });
@@ -148,21 +134,6 @@ class Inscriçao_Locais extends JFrame{
                 comboLocalPessoa.removeAllItems();
                 for(Local local:pessoa.getLocais()){
                     comboLocalPessoa.addItem(local);
-                }
-            }
-        });
-        
-        
-        comboGuestList = new JComboBox(new String[] {}); this.add(comboGuestList);
-        buttonGuestList = new JButton("GuestList do Bar"); this.add(buttonLocalInscrito);
-        buttonGuestList.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent event){
-                comboGuestList.removeAllItems();
-                if((Local)combo.getSelectedItem() instanceof Bar){
-                    /*for(Pessoa pessoa: combo.getSelectedItem()){
-                        comboGuestList.addItem(pessoa);
-                    }*/
                 }
             }
         });
