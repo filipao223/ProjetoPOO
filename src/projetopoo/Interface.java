@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 class Inscriçao_Locais extends JFrame{
     private final JCheckBox buttonInscrever;
+    private final JCheckBox buttonDesinscrever;
     private final JButton buttonSai;
     private final JButton buttonLocalInscrito;
     private final JButton buttonGuestList;
@@ -44,6 +45,20 @@ class Inscriçao_Locais extends JFrame{
                             convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
                         }
+                        if(((Bar)combo.getSelectedItem()).guestList.size() == ((Bar)combo.getSelectedItem()).getMaxGuestList()
+                            && pessoa.getTipo().equals("Boemio")){
+                            for(Pessoa remPessoa: ((Bar)combo.getSelectedItem()).getGuestList()){
+                                if (remPessoa.getTipo().equals("Boemio")){
+                                    continue;
+                                }
+                                else{
+                                    ((Bar)combo.getSelectedItem()).guestList.remove(remPessoa);
+                                    convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
+                                    convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
+                                    //remPessoa.listaLocais.remove();
+                                }
+                            }
+                    }
                         else{
                             convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
@@ -56,6 +71,46 @@ class Inscriçao_Locais extends JFrame{
                     }
                 }
             }
+        });
+        
+        buttonDesinscrever = new JCheckBox("Desinscrever");this.add(buttonDesinscrever);
+        buttonDesinscrever.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                if(buttonDesinscrever.isSelected()){
+                    if((Local)combo.getSelectedItem() instanceof Bar){
+                        if (((Bar)combo.getSelectedItem()).guestList.contains(pessoa) && ((Bar)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
+                                ((Bar)combo.getSelectedItem()).guestList.remove(pessoa);
+                                ((Bar)combo.getSelectedItem()).listaPessoas.remove(pessoa);
+                                buttonDesinscrever.setSelected(false);
+                        }
+                        else{
+                            if(((Bar)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
+                                ((Bar)combo.getSelectedItem()).listaPessoas.remove(pessoa);
+                                buttonDesinscrever.setSelected(false);
+                            }
+                        }
+                    }
+                    if((Local)combo.getSelectedItem() instanceof ParqueDesporto){
+                        if(((ParqueDesporto)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
+                            ((ParqueDesporto)combo.getSelectedItem()).listaPessoas.remove(pessoa);
+                            buttonDesinscrever.setSelected(false);
+                        }
+                    }
+                    if((Local)combo.getSelectedItem() instanceof Jardim){
+                        if(((Jardim)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
+                            ((Jardim)combo.getSelectedItem()).listaPessoas.remove(pessoa);
+                            buttonDesinscrever.setSelected(false);
+                        }
+                    }
+                    if((Local)combo.getSelectedItem() instanceof Exposicao){
+                        if(((Exposicao)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
+                            ((Exposicao)combo.getSelectedItem()).listaPessoas.remove(pessoa);
+                            buttonDesinscrever.setSelected(false);
+                        }
+                    }
+                }                
+            }           
         });
         
         buttonSai = new JButton("Sai");this.add(buttonSai);
@@ -218,7 +273,7 @@ class Login extends JFrame{
         label2 = new JLabel("Password"); this.add(label2);
         password = new JPasswordField(); this.add(password);
         password.setPreferredSize(new Dimension(80,20));
-        
+                
         //Botao login
         buttonLogin = new JButton("Login");this.add(buttonLogin);
         buttonLogin.addActionListener(new ActionListener(){
