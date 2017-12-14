@@ -75,40 +75,16 @@ class Inscriçao_Locais extends JFrame{
         
         buttonDesinscrever = new JCheckBox("Desinscrever");this.add(buttonDesinscrever);
         buttonDesinscrever.addActionListener(new ActionListener(){
-            @Override
+            @Override //Vai remover a pessoa da lista de locais
             public void actionPerformed(ActionEvent event){
                 if(buttonDesinscrever.isSelected()){
-                    if((Local)combo.getSelectedItem() instanceof Bar){
-                        if (((Bar)combo.getSelectedItem()).guestList.contains(pessoa) && ((Bar)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
-                                ((Bar)combo.getSelectedItem()).guestList.remove(pessoa);
-                                ((Bar)combo.getSelectedItem()).listaPessoas.remove(pessoa);
-                                buttonDesinscrever.setSelected(false);
-                        }
-                        else{
-                            if(((Bar)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
-                                ((Bar)combo.getSelectedItem()).listaPessoas.remove(pessoa);
-                                buttonDesinscrever.setSelected(false);
-                            }
-                        }
+                    (pessoa.getLocais()).remove((Local)comboLocalPessoa.getSelectedItem());
+                    if((Local)comboLocalPessoa.getSelectedItem() instanceof Bar){
+                        if(((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().contains(pessoa)) ((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().remove(pessoa);
                     }
-                    if((Local)combo.getSelectedItem() instanceof ParqueDesporto){
-                        if(((ParqueDesporto)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
-                            ((ParqueDesporto)combo.getSelectedItem()).listaPessoas.remove(pessoa);
-                            buttonDesinscrever.setSelected(false);
-                        }
-                    }
-                    if((Local)combo.getSelectedItem() instanceof Jardim){
-                        if(((Jardim)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
-                            ((Jardim)combo.getSelectedItem()).listaPessoas.remove(pessoa);
-                            buttonDesinscrever.setSelected(false);
-                        }
-                    }
-                    if((Local)combo.getSelectedItem() instanceof Exposicao){
-                        if(((Exposicao)combo.getSelectedItem()).listaPessoas.contains(pessoa)){
-                            ((Exposicao)combo.getSelectedItem()).listaPessoas.remove(pessoa);
-                            buttonDesinscrever.setSelected(false);
-                        }
-                    }
+                    
+                    ((Local)comboLocalPessoa.getSelectedItem()).getPessoas().remove(pessoa);
+                    buttonDesinscrever.setSelected(false);
                 }                
             }           
         });
@@ -131,6 +107,7 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Exposições.isSelected()){
                     buttonGuestList.setVisible(false);
+                    comboGuestList.setVisible(false); //Esconde o botao e lista da guestList
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Exposicao.class) {
@@ -151,6 +128,7 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Bares.isSelected()){
                     buttonGuestList.setVisible(true);
+                    comboGuestList.setVisible(true); //Mostra o botao e lista da guestList
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Bar.class) {
@@ -170,6 +148,7 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Jardins.isSelected()){
                     buttonGuestList.setVisible(false);
+                    comboGuestList.setVisible(false); //Esconde o botao e lista da guestList
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == Jardim.class) {
@@ -188,6 +167,7 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if (Desporto.isSelected()){
                     buttonGuestList.setVisible(false);
+                    comboGuestList.setVisible(false); //Esconde o botao e lista da guestList
                     combo.removeAllItems();
                     for(Local local:listaL){
                         if (local.getClass() == ParqueDesporto.class) {
@@ -206,6 +186,8 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 comboLocalPessoa.removeAllItems();
+                System.out.println(pessoa.getLocais());
+                System.out.println(((Local)combo.getSelectedItem()).getPessoas());
                 for(Local local:pessoa.getLocais()){
                     comboLocalPessoa.addItem(local);
                 }
