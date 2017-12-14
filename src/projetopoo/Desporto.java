@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package projetopoo;
+
+import java.io.Serializable;
+
 /**
 * Classe de Desporto
-*@author Joao Mendes e Joao Motenegro
+*@author Joao Montenegro e Joao Mendes
 */
 
-public class Desporto {
+public class Desporto implements Serializable{
     private final String tipo;
     public Desporto(String tipo) {
         this.tipo = tipo;

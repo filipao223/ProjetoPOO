@@ -5,6 +5,7 @@
  */
 package projetopoo;
 
+import java.io.File;
 import java.io.IOException;
 import static java.lang.System.exit;
 import java.util.*;
@@ -32,10 +33,19 @@ public class ProjetoPOO {
 
         //Lê dos ficheiros
         try{
-            loadConfig(comunidadeDEI, listaLocais, listaConvivios, listaDesportos);
-            System.out.println("Configuraçoes carregadas.");
+            //if(new File("ConfigObj").isFile()){
+                //System.out.println("Ficheiro obj existe");
+                //FicheiroObjecto f = new FicheiroObjecto();
+                //loadConfigObj(f, comunidadeDEI, listaLocais, listaConvivios, listaDesportos);
+            //}
+            //else{
+                //System.out.println("Nao existe ficheiro Obj");
+                //FicheiroObjecto f = new FicheiroObjecto();
+                loadConfigText(comunidadeDEI, listaLocais, listaConvivios, listaDesportos);
+                //saveConfigObj(f, comunidadeDEI, listaLocais, listaConvivios, listaDesportos);
+            //}
         }catch(IOException ioexcep){
-            System.out.println("Erro ao carregar as informaçoes: " + ioexcep);
+            //System.out.println("Erro ao carregar as informaçoes: " + ioexcep);
         }
         
         while(true){
@@ -44,82 +54,6 @@ public class ProjetoPOO {
                     + "5.Listar pessoas de local\n\t6.Sair: ");
             int esc = sc.nextInt();
             sc.nextLine();
-            switch(esc){
-                case 1:
-                    printInfo(listaDesportos, comunidadeDEI, listaLocais, listaConvivios);
-                    break;
-                case 2:
-                    System.out.println("A que convivio?: ");
-                    convEsc = sc.nextLine();
-                    for(Convivio c:listaConvivios){
-                        if(Objects.equals(convEsc, c.getNome())){
-                            Pessoa p;
-                            if((p = getPessoa(comunidadeDEI)) == null){
-                                System.out.println("Pessoa não encontrada.");
-                                break;
-                            }
-                            if(c.addPessoa(p) != 1){
-                                System.out.println("Pessoa nao adicionada.");
-                                break;
-                            }
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    System.out.println("A que convivio?: ");
-                    convEsc = sc.nextLine();
-                    for(Convivio c:listaConvivios){
-                        if(Objects.equals(convEsc, c.getNome())){
-                            Pessoa p;
-                            Local l;
-                            if((p = getPessoa(c.listaPessoas)) == null){
-                                System.out.println("Pessoa nao encontrada.");
-                                break;
-                            }
-                            if((l = getLocal(c.listaLocais)) == null){
-                                System.out.println("Local nao encontrado.");
-                                break;
-                            }
-                            if(c.addLocalToPessoa(p, l)!=1) System.out.println("Não adicionado.");
-                            else System.out.println("Adicionado.");
-                            break;
-                        }
-                    }
-                    break;
-                case 4:
-                    System.out.println("A que convivio?: ");
-                    convEsc = sc.nextLine();
-                    for(Convivio c:listaConvivios){
-                        if(Objects.equals(convEsc, c.getNome())){
-                            Pessoa p;
-                            if((p = getPessoa(c.listaPessoas)) == null){
-                                System.out.println("Pessoa nao encontrada.");
-                                break;
-                            }
-                            System.out.println("Locais:\n" + p.getLocais());
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    System.out.println("A que convivio?: ");
-                    convEsc = sc.nextLine();
-                    for(Convivio c:listaConvivios){
-                        if(Objects.equals(convEsc, c.getNome())){
-                            Local l;
-                            if((l = getLocal(c.listaLocais)) == null){
-                                System.out.println("Local não encontrado.");
-                                break;
-                            }
-                            System.out.println("Pessoas:\n" + l.getPessoas());
-                            break;
-                        }
-                    }
-                    break;
-                case 6:
-                    exit(0);
-            }
         }
     }
     
@@ -130,7 +64,7 @@ public class ProjetoPOO {
      * @return
      * @throws IOException
      */
-    static int loadConfig(ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
+    static int loadConfigText(ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
         
         String linha;
         
@@ -164,6 +98,78 @@ public class ProjetoPOO {
         
         return 1;
     }
+    
+    /*static int saveConfigObj(FicheiroObjecto f, ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
+        f.abreEscrita("ConfigObj");
+        for(Pessoa pessoa:comunidadeDEI){
+            f.escreveObjecto(pessoa);
+        }
+        for(Local local:listaLocais){
+            f.escreveObjecto(local);
+        }
+        for(Convivio convivio:listaConvivios){
+            f.escreveObjecto(convivio);
+        }
+        for(Desporto desporto:listaDesportos){
+            f.escreveObjecto(desporto);
+        }
+        f.fechaEscrita();
+        return 1;
+    }*/
+    
+    /*static int loadConfigObj(FicheiroObjecto f, ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
+        f.abreLeitura("ConfigObj");
+        Object temp = null, temp2 = null;
+        
+        try{
+            while(true){
+                temp = f.leObjecto();
+                Pessoa p = (Pessoa)temp;
+                comunidadeDEI.add((Pessoa)f.leObjecto());
+            }
+        }catch(ClassNotFoundException | ClassCastException e){
+            comunidadeDEI.add((Pessoa)temp);
+            System.out.println("Leu pessoas de objectos");
+            System.out.println(comunidadeDEI);
+        }
+        
+        try{
+            while(true){
+                temp = f.leObjecto();
+                Local l = (Local)temp;
+                listaLocais.add((Local)f.leObjecto());
+            }
+        }catch(ClassNotFoundException | ClassCastException e){
+            listaConvivios.add((Convivio)temp);
+            System.out.println("Leu locais de Obj");
+            System.out.println(listaLocais);
+        }
+        
+        try{
+            while(true){
+                temp = f.leObjecto();
+                Convivio c = (Convivio)temp;
+                listaConvivios.add(c);
+            }
+        }catch(ClassNotFoundException | ClassCastException e){
+            listaDesportos.add((Desporto)temp);
+            System.out.println("Leu convivios de Obj");
+            System.out.println(listaConvivios);
+        }
+        
+        try{
+            while(true){
+                temp = f.leObjecto();
+                Desporto d = (Desporto)temp;
+                listaDesportos.add(d);
+            }
+        }catch(ClassNotFoundException | ClassCastException e){
+            System.out.println("Leu desportos de Obj");
+            System.out.println(listaDesportos);
+        }
+        f.fechaLeitura();
+        return 1;
+    }*/
     
     /**
      *

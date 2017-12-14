@@ -6,7 +6,6 @@
 package projetopoo;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -22,8 +21,6 @@ class Aluno extends Pessoa{
     private int contLocais = 0;
     
     protected Convivio convInscrito;
-    
-    Scanner sc = new Scanner(System.in);
     
     public Aluno(String nome, String perfil, String tipo) {
         this.nome = nome;
@@ -64,6 +61,22 @@ class Aluno extends Pessoa{
         System.out.println("Pessoa inscrita no local.");
         
         return 1;
+    }
+    
+    @Override
+    protected int removeLocal(Local local){
+        //verifica a existencia do local
+        for(Local l:this.listaLocais){
+            if(local == l){
+                this.listaLocais.remove(local);
+                local.removePessoa(this);
+                this.contLocais--;
+                return 1;
+            }
+        }
+        
+        System.out.println("Erro. Local não existe");
+        return 0;
     }
     
     private void incrContLocais(){
@@ -108,6 +121,11 @@ class Aluno extends Pessoa{
     
     @Override
     public String toString(){
+        return this.getNome() + " " + this.getTipo() + " NºLocais Insc:" + this.getLocais().size();
+    }
+    
+    @Override
+    public String getDescricao(){
         return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", curso: " + this.getTipo();
     }
 }

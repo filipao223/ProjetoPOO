@@ -41,6 +41,21 @@ class Exposicao extends Local{
     }
     
     @Override
+    protected int removePessoa(Pessoa p){
+        //Verifica a existencia da pessoa
+        for(Pessoa pessoa:this.listaPessoas){
+            if(p == pessoa){
+                listaPessoas.remove(p);
+                this.nInscritos--;
+                return 1;
+            }
+        }
+        
+        System.out.println("Erro. Pessoa nao existe");
+        return 0;
+    }
+    
+    @Override
     public String getCoordGPS(){
         return this.coordGPS;
     }
@@ -52,7 +67,7 @@ class Exposicao extends Local{
     
     @Override
     public String toString(){
-        return this.forma + " Preço:" + this.custoIngresso + "€";
+        return this.forma + " Preço:" + this.custoIngresso + "€ NºInsc:" + this.getNInscritos();
     }
     
     @Override

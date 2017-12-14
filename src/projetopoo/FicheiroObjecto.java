@@ -51,3 +51,15 @@ class FicheiroObjecto{
         inStream.close();
     }
 }
+
+
+//Ficheiro Objeto
+/*
+    Pessoas
+------------
+    Locais
+------------
+    Convivios
+------------
+    Desportos
+*/

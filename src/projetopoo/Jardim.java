@@ -40,6 +40,21 @@ class Jardim extends Parque{
     }
     
     @Override
+    protected int removePessoa(Pessoa p){
+        //Verifica a existencia da pessoa
+        for(Pessoa pessoa:this.listaPessoas){
+            if(p == pessoa){
+                listaPessoas.remove(p);
+                this.nInscritos--;
+                return 1;
+            }
+        }
+        
+        System.out.println("Erro. Pessoa nao existe");
+        return 0;
+    }
+    
+    @Override
     public String getForma(){
         return "";
     }
@@ -66,7 +81,7 @@ class Jardim extends Parque{
     
     @Override
     public String toString(){
-        return "GPS:" + this.getCoordGPS() + " "  + this.area;
+        return "GPS:" + this.getCoordGPS() + " "  + this.area + "NºInsc:" + this.getNInscritos();
     }
     
     @Override

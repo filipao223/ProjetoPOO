@@ -5,15 +5,17 @@
  */
 package projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author filipe
  */
-abstract class Pessoa{
+abstract class Pessoa implements Serializable{
     
     abstract int addLocal(Local local);
+    abstract int removeLocal(Local local);
     abstract String getNome();
     abstract String getPerfil();
     abstract String getTipo();
@@ -22,4 +24,5 @@ abstract class Pessoa{
     abstract String getPassword();
     abstract int setPassword(String password);
     abstract int inscricao(Convivio convivio);
+    abstract String getDescricao();
 }

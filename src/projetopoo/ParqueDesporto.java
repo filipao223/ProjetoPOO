@@ -39,6 +39,21 @@ class ParqueDesporto extends Parque{
     }
     
     @Override
+    protected int removePessoa(Pessoa p){
+        //Verifica a existencia da pessoa
+        for(Pessoa pessoa:this.listaPessoas){
+            if(p == pessoa){
+                listaPessoas.remove(p);
+                this.nInscritos--;
+                return 1;
+            }
+        }
+        
+        System.out.println("Erro. Pessoa nao existe");
+        return 0;
+    }
+    
+    @Override
     protected int receita(){
         return 1;
     }
@@ -55,7 +70,7 @@ class ParqueDesporto extends Parque{
     
     @Override
     public String toString(){
-        return "GPS:" + this.coordGPS;
+        return "GPS:" + this.coordGPS + " NºInsc:" + this.getNInscritos();
     }
     
     @Override

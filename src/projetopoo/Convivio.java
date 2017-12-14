@@ -5,22 +5,20 @@
  */
 package projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
  * @author filipe
  */
-class Convivio {
+class Convivio implements Serializable{
     
     protected final String nome;
     protected int contPessoas = 0;
     
     protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     protected ArrayList<Local> listaLocais = new ArrayList<>();
-    
-    Scanner sc = new Scanner(System.in);
     
     public Convivio(String nome, ArrayList<Local> listaLocais) {
         this.nome = nome;
@@ -82,6 +80,23 @@ class Convivio {
         }
         
         p.addLocal(l);
+        
+        return 1;
+    }
+    
+    protected int removeLocalFromPessoa(Pessoa p, Local l){
+        //Verifica existencia da pessoa
+        if(checkPessoa(p) != 1){
+            System.out.println("\nErro. Pessoa inexistente.");
+            return 0;
+        }
+        //Verifica existencia do local
+        if(checkLocal(l) != 1){
+            System.out.println("1nErro. Local inexistente.");
+            return 0;
+        }
+        
+        p.removeLocal(l);
         
         return 1;
     }

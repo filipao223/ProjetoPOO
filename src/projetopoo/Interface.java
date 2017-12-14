@@ -39,6 +39,8 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 if(buttonInscrever.isSelected()){
+                    //Ordena a lista de locais de Mais iscritos para Menos inscritos
+                    Collections.sort(listaL, new LocalComparator());
                     if((Local)combo.getSelectedItem() instanceof Bar){
                         if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
                             convivio.addLocalToPessoa(pessoa, (Bar)combo.getSelectedItem());
@@ -78,12 +80,11 @@ class Inscriçao_Locais extends JFrame{
             @Override //Vai remover a pessoa da lista de locais
             public void actionPerformed(ActionEvent event){
                 if(buttonDesinscrever.isSelected()){
-                    (pessoa.getLocais()).remove((Local)comboLocalPessoa.getSelectedItem());
                     if((Local)comboLocalPessoa.getSelectedItem() instanceof Bar){
                         if(((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().contains(pessoa)) ((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().remove(pessoa);
                     }
                     
-                    ((Local)comboLocalPessoa.getSelectedItem()).getPessoas().remove(pessoa);
+                    convivio.removeLocalFromPessoa(pessoa, (Local)comboLocalPessoa.getSelectedItem());
                     buttonDesinscrever.setSelected(false);
                 }                
             }           

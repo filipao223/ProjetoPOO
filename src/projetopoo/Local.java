@@ -5,6 +5,7 @@
  */
 package projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -12,9 +13,10 @@ import java.util.Comparator;
  *
  * @author filipe
  */
-abstract class Local{
+abstract class Local implements Serializable{
     
     abstract int addPessoa(Pessoa p);
+    abstract int removePessoa(Pessoa p);
     abstract int receita();
     abstract String getCoordGPS();
     abstract String getDescricao();
