@@ -54,11 +54,11 @@ class Inscriçao_Locais extends JFrame{
                                 else{
                                     ((Bar)combo.getSelectedItem()).guestList.remove(remPessoa);
                                     convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
-                                    convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
-                                    //remPessoa.listaLocais.remove();
+                                    convivio.addLocalToPessoa(pessoa,(Bar)combo.getSelectedItem());
+                                    
                                 }
                             }
-                    }
+                        }
                         else{
                             convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
