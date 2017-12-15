@@ -18,6 +18,7 @@ class Inscriçao_Locais extends JFrame{
     private final JButton buttonSai;
     private final JButton buttonLocalInscrito;
     private final JButton buttonGuestList;
+    private final JButton buttonReceita;
     private final JRadioButton Exposições;
     private final JRadioButton Bares;
     private final JRadioButton Jardins;
@@ -209,6 +210,27 @@ class Inscriçao_Locais extends JFrame{
                     }
                 }
             }
+        });
+        
+        buttonReceita = new JButton("Receita Prevista");this.add(buttonReceita);
+        buttonReceita.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event){
+                int receita = 0;
+                for(Local local: convivio.listaLocais){
+                    if (local instanceof Bar || local instanceof Exposicao){
+                        for(Pessoa pessoa: local.getPessoas()){
+                            if(pessoa instanceof Aluno){
+                                receita = (int)(receita + local.getCustoMin()*0.90);
+                            }
+                            else{
+                                receita = (int)(receita + local.getCustoMin());
+                            }
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Receita aproximadamente de "+ receita, "Receita Prevista", JOptionPane.INFORMATION_MESSAGE);
+            }         
         });
         
         this.pack();

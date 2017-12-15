@@ -81,7 +81,7 @@ class Exposicao extends Local{
     }
     
     @Override
-    public int getCustoIngresso() {
+    public int getCustoMin() {
         return custoIngresso;
     }
     

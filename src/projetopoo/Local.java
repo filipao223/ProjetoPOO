@@ -35,9 +35,7 @@ abstract class Local implements Serializable{
     int addGuestList(Pessoa p){
         return 1;
     }
-    int getCustoIngresso(){
-        return 1;
-    }
+
     int getNInscritos(){
         return 1;
     }
