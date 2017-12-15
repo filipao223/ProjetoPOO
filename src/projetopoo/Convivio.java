@@ -101,7 +101,7 @@ class Convivio implements Serializable{
         return 1;
     }
     
-    protected int addGuestListToPessoa(Pessoa p,Local l){
+    protected int addPessoaToGuestList(Pessoa p,Local l){
         //Verifica existencia da pessoa
         if(checkPessoa(p) != 1){
             System.out.println("\nErro. Pessoa inexistente.");

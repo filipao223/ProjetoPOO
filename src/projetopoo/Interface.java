@@ -27,6 +27,9 @@ class Inscriçao_Locais extends JFrame{
     private final JComboBox comboLocalPessoa;
     private final JComboBox comboGuestList;
     
+    int enterGuestList = 0;
+    boolean checkAddToGuestList = false;
+    
     public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
         this.setPreferredSize(new Dimension(800,350));
         this.setTitle("Inscrições Locais");
@@ -43,35 +46,51 @@ class Inscriçao_Locais extends JFrame{
                     //Ordena a lista de locais de Mais iscritos para Menos inscritos
                     Collections.sort(listaL, new LocalComparator());
                     if((Local)combo.getSelectedItem() instanceof Bar){
-                        if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
-                            convivio.addLocalToPessoa(pessoa, (Bar)combo.getSelectedItem());
-                            convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
+                        //Verifica lotação do bar
+                        if(((Local)combo.getSelectedItem()).getNInscritos() < ((Local)combo.getSelectedItem()).getLotacao()){
+                            
+                            //Verifica se há espaço na guest list
+                            if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
+                            //Ainda há espaço
+                            convivio.addPessoaToGuestList(pessoa,(Bar)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
-                        }
-                        if(((Bar)combo.getSelectedItem()).guestList.size() == ((Bar)combo.getSelectedItem()).getMaxGuestList()
-                            && pessoa.getTipo().equals("Boemio")){
-                            for(Pessoa remPessoa: ((Bar)combo.getSelectedItem()).getGuestList()){
-                                if (remPessoa.getTipo().equals("Boemio")){
-                                    continue;
+                            }
+                            if(((Bar)combo.getSelectedItem()).guestList.size() >= ((Bar)combo.getSelectedItem()).getMaxGuestList() && pessoa.getTipo().equals("Boemio")){
+                                //Já não há espaço, mas a pessoa é do tipo boémio, verifica agora se pode remover alguem
+                                checkAddToGuestList = false;
+                                for(Pessoa remPessoa: ((Bar)combo.getSelectedItem()).getGuestList()){
+                                    if (!remPessoa.getTipo().equals("Boemio")){
+                                        ((Bar)combo.getSelectedItem()).guestList.remove(remPessoa);
+                                        convivio.addPessoaToGuestList(pessoa,(Bar)combo.getSelectedItem());
+                                        checkAddToGuestList = true; //Flag que indica se foi adicionado à guest list ou não
+                                    }
+                                }
+
+                                if(checkAddToGuestList){
+                                    System.out.println("Adicionado à guest list.");
+                                    JOptionPane.showMessageDialog(null, "Adicionado à guest list.", "Adicionado", JOptionPane.INFORMATION_MESSAGE);
                                 }
                                 else{
-                                    ((Bar)combo.getSelectedItem()).guestList.remove(remPessoa);
-                                    convivio.addGuestListToPessoa(pessoa,(Bar)combo.getSelectedItem());
-                                    convivio.addLocalToPessoa(pessoa,(Bar)combo.getSelectedItem());
-                                    
+                                    System.out.println("Não foi possivel adicionar à guest list.");
+                                    JOptionPane.showMessageDialog(null, "Não foi possivel adicionar à guest list.", "Não adicionado", JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }
-                        }
-                        else{
+                            
                             convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
+
+                        } //Fim if da lotação
+                        else{
+                            System.out.println("Máximo lotação do bar atingido!");
+                            JOptionPane.showMessageDialog(null, "Máximo lotação do bar atingido, não inscrito.", "Máximo lotação", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     else{
-                    convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
-                    System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
-                    buttonInscrever.setSelected(false);
+                        convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
+                        System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
+                        buttonInscrever.setSelected(false);
                     }
+                    buttonInscrever.setSelected(false);
                 }
             }
         });
@@ -221,10 +240,10 @@ class Inscriçao_Locais extends JFrame{
                     if (local instanceof Bar || local instanceof Exposicao){
                         for(Pessoa pessoa: local.getPessoas()){
                             if(pessoa instanceof Aluno){
-                                receita = (int)(receita + local.getCustoMin()*0.90);
+                                receita = (int)(receita + local.getCusto()*0.90);
                             }
                             else{
-                                receita = (int)(receita + local.getCustoMin());
+                                receita = (int)(receita + local.getCusto());
                             }
                         }
                     }

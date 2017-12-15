@@ -91,7 +91,7 @@ class Bar extends Local{
     }
     
     @Override
-    public int getCustoMin() {
+    public int getCusto() {
         return custoMin;
     }
     

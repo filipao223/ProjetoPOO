@@ -26,7 +26,7 @@ abstract class Local implements Serializable{
     int getLotacao(){
         return 1;
     }
-    int getCustoMin(){
+    int getCusto(){
         return 1;
     }
     int getMaxGuestList(){
