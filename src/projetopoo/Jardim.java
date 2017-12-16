@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Jardim extends Parque{
 
@@ -55,11 +56,6 @@ class Jardim extends Parque{
     }
     
     @Override
-    public String getForma(){
-        return "";
-    }
-    
-    @Override
     public String getCoordGPS() {
         return coordGPS;
     }
@@ -67,11 +63,6 @@ class Jardim extends Parque{
     @Override
     public String getArea() {
         return area;
-    }
-    
-    @Override
-    protected int receita(){
-        return 1;
     }
     
     @Override

@@ -13,7 +13,8 @@ import java.io.ObjectOutputStream;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class FicheiroObjecto{
     

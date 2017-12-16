@@ -11,7 +11,11 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-
+/**
+ * 
+ * @author João Montenegro
+ * @author João Mendes
+ */
 class Inscriçao_Locais extends JFrame{
     private final JCheckBox buttonInscrever;
     private final JCheckBox buttonDesinscrever;
@@ -30,7 +34,15 @@ class Inscriçao_Locais extends JFrame{
     int enterGuestList = 0;
     boolean checkAddToGuestList = false;
     
-    public Inscriçao_Locais(String nomeInterface,Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
+    /**
+     * Construtor da frame que vai permitir ao utilizador inscrever-se e desincrever-se em locais, guest
+     * lists, ver receita e ver lista de locais inscritos.
+     * @param convivio  Convivio escolhido
+     * @param listaC
+     * @param listaL
+     * @param pessoa 
+     */
+    public Inscriçao_Locais(Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
         this.setPreferredSize(new Dimension(800,350));
         this.setTitle("Inscrições Locais");
         this.setLocation(100,100);
@@ -101,7 +113,7 @@ class Inscriçao_Locais extends JFrame{
             public void actionPerformed(ActionEvent event){
                 if(buttonDesinscrever.isSelected()){
                     if((Local)comboLocalPessoa.getSelectedItem() instanceof Bar){
-                        if(((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().contains(pessoa)) ((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().remove(pessoa);
+                        if(((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().contains(pessoa)) ((Bar)comboLocalPessoa.getSelectedItem()).removeFromGuestList(pessoa);
                     }
                     
                     convivio.removeLocalFromPessoa(pessoa, (Local)comboLocalPessoa.getSelectedItem());
@@ -225,7 +237,7 @@ class Inscriçao_Locais extends JFrame{
                 comboGuestList.removeAllItems();
                 if((Local)combo.getSelectedItem() instanceof Bar){
                     for(Pessoa pessoa: ((Local)combo.getSelectedItem()).getGuestList()){
-                            comboGuestList.addItem((pessoa).getDescricao());
+                        comboGuestList.addItem(pessoa.getDescricao());
                     }
                 }
             }
@@ -314,7 +326,7 @@ class Login extends JFrame{
                             //Pessoa já está inscrita
                             System.out.println("Pessoa já inscrita em -" + convivio.getNome() + "-.");
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaC,listaL, pessoa);
                             
                             //Ordena a lista de locais de Mais iscritos para Menos inscritos
                             Collections.sort(listaL, new LocalComparator());
@@ -325,7 +337,7 @@ class Login extends JFrame{
                             System.out.println("Pessoa ainda não inscrita em -" + convivio.getNome() + "-. Inscrita automaticamente.");
                             pessoa.setPassword(passwordInput); //Password da pessoa é agora a introduzida na caixa
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(nomeInput,convivio,listaC,listaL, pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaC,listaL, pessoa);
                             
                             //Ordena a lista de locais de Mais iscritos para Menos inscritos
                             Collections.sort(listaL, new LocalComparator());

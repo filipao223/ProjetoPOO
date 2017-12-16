@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Prof extends Pessoa{
 
@@ -94,9 +95,8 @@ class Prof extends Pessoa{
     }
     
     @Override
-    protected int setPassword(String password) {
+    protected void setPassword(String password) {
         this.password = password;
-        return 1;
     }
     
     @Override
@@ -107,11 +107,6 @@ class Prof extends Pessoa{
     @Override
     public String getNome(){
         return this.nome;
-    }
-    
-    @Override
-    public void addToListaLocal(Local l){
-        this.listaLocais.add(l);
     }
     
     @Override

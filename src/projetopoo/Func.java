@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Func extends Pessoa{
 
@@ -22,6 +23,12 @@ class Func extends Pessoa{
     
     private Convivio convInscrito;
     
+    /**
+     * Construtor da classe
+     * @param nome Nome do funcionário
+     * @param perfil Perfil do funcionario (boémio, cultural, ...)
+     * @param tipo Tipo do funcionario (tempo parcial ou inteiro)
+     */
     public Func(String nome, String perfil, String tipo) {
         this.nome = nome;
         this.perfil = perfil;
@@ -99,9 +106,8 @@ class Func extends Pessoa{
     }
     
     @Override
-    protected int setPassword(String password) {
+    protected void setPassword(String password) {
         this.password = password;
-        return 1;
     }
     
     @Override
@@ -114,11 +120,6 @@ class Func extends Pessoa{
         ArrayList<Local> temp = new ArrayList<>();
         temp.addAll(this.listaLocais);
         return temp;
-    }
-    
-    @Override
-    public void addToListaLocal(Local l){
-        this.listaLocais.add(l);
     }
     
     @Override

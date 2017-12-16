@@ -7,7 +7,8 @@ package projetopoo;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 abstract class Parque extends Local{
 }

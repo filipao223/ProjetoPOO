@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class ParqueDesporto extends Parque{
     
@@ -51,11 +52,6 @@ class ParqueDesporto extends Parque{
         
         System.out.println("Erro. Pessoa nao existe");
         return 0;
-    }
-    
-    @Override
-    protected int receita(){
-        return 1;
     }
     
     @Override

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Bar extends Local{
 
@@ -91,11 +92,6 @@ class Bar extends Local{
         
         System.out.println("Erro. Pessoa nao existe");
         return 0;
-    }
-    
-    @Override
-    protected int receita(){
-        return 1;
     }
     
     @Override

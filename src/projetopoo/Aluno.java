@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Aluno extends Pessoa{
 
@@ -99,9 +100,8 @@ class Aluno extends Pessoa{
     }
 
     @Override
-    protected int setPassword(String password) {
+    protected void setPassword(String password) {
         this.password = password;
-        return 1;
     }
     
     @Override
@@ -114,11 +114,6 @@ class Aluno extends Pessoa{
         ArrayList<Local> temp = new ArrayList<>();
         temp.addAll(this.listaLocais);
         return temp;
-    }
-    
-    @Override
-    public void addToListaLocal(Local l){
-        this.listaLocais.add(l);
     }
     
     @Override

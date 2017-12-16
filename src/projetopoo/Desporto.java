@@ -8,10 +8,10 @@ package projetopoo;
 import java.io.Serializable;
 
 /**
-* Classe de Desporto
-*@author Joao Montenegro e Joao Mendes
-*/
-
+ * 
+ * @author João Montenegro
+ * @author João Mendes
+ */
 public class Desporto implements Serializable{
     private final String tipo;
     public Desporto(String tipo) {

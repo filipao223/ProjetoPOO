@@ -13,7 +13,8 @@ import java.io.IOException;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 public class FicheiroTexto {
     

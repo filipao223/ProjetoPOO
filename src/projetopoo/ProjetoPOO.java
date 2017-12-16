@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 public class ProjetoPOO {
 
@@ -60,11 +61,14 @@ public class ProjetoPOO {
     }
     
     /**
-     *
-     * @param comunidadeDEI
-     * @param listaLocais
-     * @return
-     * @throws IOException
+     * Lê as informações de um ficheiro de texto relativas a pessoas, locais, convivios e desportos e
+     * coloca cada um na sua lista, construindo um objecto novo de acordo com as informações no ficheiro
+     * @param comunidadeDEI     A lista que vai conter todas as pessoas
+     * @param listaLocais       A lista que vai conter todos os locais
+     * @param listaConvivios    A lista que vai conter todos os convivios
+     * @param listaDesportos    A lista que vai conter todos os desportos
+     * @return  1
+     * @throws IOException 
      */
     static int loadConfigText(ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
         
@@ -101,6 +105,16 @@ public class ProjetoPOO {
         return 1;
     }
     
+    /**
+     * Guarda o conteúdo das listas de pessoas, locais, convivios e desportos no seu respectivo ficheiro de objectos.
+     * Este método só é chamado se estes ficheiros ainda não existirem na directoria.
+     * @param comunidadeDEI     A lista de pessoas
+     * @param listaLocais       A lista de locais
+     * @param listaConvivios    A lista de convivios
+     * @param listaDesportos    A lista de desportos
+     * @return  1
+     * @throws IOException 
+     */
     static int saveConfigObj(ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
         FicheiroObjecto f = new FicheiroObjecto();
         f.abreEscrita("Pessoas");
@@ -133,6 +147,16 @@ public class ProjetoPOO {
         return 1;
     }
     
+    /**
+     * Carrega pessoas, locais, convivios e desportos do respectivo ficheiro de objectos.
+     * Este método só é chamado se estes ficheiros já existirem na directoria.
+     * @param comunidadeDEI     A lista de pessoas
+     * @param listaLocais       A lista de locais
+     * @param listaConvivios    A lista de convivios
+     * @param listaDesportos    A lista de desportos
+     * @return  1
+     * @throws IOException 
+     */
     static int loadConfigObj(ArrayList<Pessoa> comunidadeDEI, ArrayList<Local> listaLocais, ArrayList<Convivio> listaConvivios, ArrayList<Desporto> listaDesportos) throws IOException{
         FicheiroObjecto f = new FicheiroObjecto();
         f.abreLeitura("Pessoas");
@@ -185,27 +209,10 @@ public class ProjetoPOO {
     }
     
     /**
-     *
-     * @param listaD
-     * @param listaP
-     * @param listaL
-     * @param listaC
+     * Pede o nome da pessoa que se quer obter e procura-a na lista de pessoas passada por parametro.
+     * @param listaPessoas
+     * @return Devolve a pessoa se existir na lista de pessoas, null caso contrário
      */
-    static void printInfo(ArrayList<Desporto> listaD, ArrayList<Pessoa> listaP, ArrayList<Local> listaL, ArrayList<Convivio> listaC){
-        System.out.println("Desportos:");
-        System.out.println(listaD);
-        
-        System.out.println("Comunidade do DEI:");
-        System.out.println(listaP);
-        
-        System.out.println("Locais:");
-        System.out.println(listaL);
-        
-        System.out.println("Convivios:");
-        System.out.println(listaC);
-    }
-        
-    
     static Pessoa getPessoa(ArrayList<Pessoa> listaPessoas){
         System.out.println("Nome da pessoa?: ");
         Scanner sc = new Scanner(System.in);
@@ -218,6 +225,12 @@ public class ProjetoPOO {
         return null;
     }
     
+    /**
+     * Pede as coordenadas do local ao utilizador e procura-o na lista de locais
+     * passada por parametro.
+     * @param listaLocais Lista de locais
+     * @return Devolve o local se existir na lista, null caso contrário
+     */
     static Local getLocal(ArrayList<Local> listaLocais){
         System.out.println("Coord do local?: ");
         Scanner sc = new Scanner(System.in);

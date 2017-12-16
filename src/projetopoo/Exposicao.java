@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author filipe
+ * @author João Montenegro
+ * @author João Mendes
  */
 class Exposicao extends Local{
 
@@ -58,11 +59,6 @@ class Exposicao extends Local{
     @Override
     public String getCoordGPS(){
         return this.coordGPS;
-    }
-    
-    @Override
-    protected int receita(){
-        return 1;
     }
     
     @Override
