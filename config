@@ -2,13 +2,24 @@
 1 Prof1 cultural prof associado
 2 Func1 boemio func parcial
 3 Aluno1 boemio aluno lei
+4 Prof2 boemio prof auxiliar
+5 Func2 poupadinho func parcial
+6 Aluno2 desportivo aluno lei
+7 Prof3 cultural prof catedratico
+8 Func3 desportivo func inteiro
+9 Aluno3 poupadinho aluno lei
+10 Prof4 desportivo prof auxiliar
 ---Locais---
 1 3673_213 exposicao pintura 35
-2 2343_123 bar 120 5 5
+2 2343_123 bar 120 15 5
 3 2543_123 jardim 100
 4 2100_123 exposicao escultura 25
 5 2321_210 parquedesporto
-6 1654_210 bar 50 1 1
+6 1654_210 bar 50 10 1
+7 1854_264 jardim 50
+8 7123_123 bar 70 10 2
+9 6235_123 parquedesporto
+10 6231_123 jardim 200
 ---Convivio---
 1 conv1
 2 conv2
