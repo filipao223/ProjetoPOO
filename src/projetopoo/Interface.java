@@ -225,7 +225,15 @@ class Inscriçao_Locais extends JFrame{
                 comboGuestList.removeAllItems();
                 if((Local)combo.getSelectedItem() instanceof Bar){
                     for(Pessoa pessoa: ((Local)combo.getSelectedItem()).getGuestList()){
-                        comboGuestList.addItem(pessoa);
+                        if(pessoa instanceof Aluno){
+                            comboGuestList.addItem(((Aluno)pessoa).getDescricao());
+                        }
+                        if(pessoa instanceof Prof){
+                            comboGuestList.addItem(((Prof)pessoa).getDescricao());
+                        }
+                        if(pessoa instanceof Func){
+                            comboGuestList.addItem(((Func)pessoa).getDescricao());
+                        }
                     }
                 }
             }

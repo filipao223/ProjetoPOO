@@ -128,6 +128,6 @@ class Prof extends Pessoa{
     
     @Override
     public String getDescricao(){
-        return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil() + ", professor: " + this.getTipo();
+        return this.getClass().getSimpleName() + ", nome: " + this.getNome() + ", perfil: " + this.getPerfil();
     }
 }
