@@ -50,17 +50,17 @@ class Inscriçao_Locais extends JFrame{
                         if(((Local)combo.getSelectedItem()).getNInscritos() < ((Local)combo.getSelectedItem()).getLotacao()){
                             
                             //Verifica se há espaço na guest list
-                            if(((Bar)combo.getSelectedItem()).guestList.size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
+                            if(((Bar)combo.getSelectedItem()).getGuestList().size() < ((Bar)combo.getSelectedItem()).getMaxGuestList()){
                             //Ainda há espaço
                             convivio.addPessoaToGuestList(pessoa,(Bar)combo.getSelectedItem());
                             buttonInscrever.setSelected(false);
                             }
-                            if(((Bar)combo.getSelectedItem()).guestList.size() >= ((Bar)combo.getSelectedItem()).getMaxGuestList() && pessoa.getTipo().equals("Boemio")){
+                            if(((Bar)combo.getSelectedItem()).getGuestList().size() >= ((Bar)combo.getSelectedItem()).getMaxGuestList() && pessoa.getTipo().equals("Boemio")){
                                 //Já não há espaço, mas a pessoa é do tipo boémio, verifica agora se pode remover alguem
                                 checkAddToGuestList = false;
                                 for(Pessoa remPessoa: ((Bar)combo.getSelectedItem()).getGuestList()){
                                     if (!remPessoa.getTipo().equals("Boemio")){
-                                        ((Bar)combo.getSelectedItem()).guestList.remove(remPessoa);
+                                        ((Bar)combo.getSelectedItem()).removeFromGuestList(remPessoa);
                                         convivio.addPessoaToGuestList(pessoa,(Bar)combo.getSelectedItem());
                                         checkAddToGuestList = true; //Flag que indica se foi adicionado à guest list ou não
                                     }
@@ -90,6 +90,7 @@ class Inscriçao_Locais extends JFrame{
                         System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
                         buttonInscrever.setSelected(false);
                     }
+                    Collections.sort(listaL, new LocalComparator());
                 }
             }
         });
@@ -235,7 +236,7 @@ class Inscriçao_Locais extends JFrame{
             @Override
             public void actionPerformed(ActionEvent event){
                 int receita = 0;
-                for(Local local: convivio.listaLocais){
+                for(Local local: convivio.getLocais()){
                     if (local instanceof Bar || local instanceof Exposicao){
                         for(Pessoa pessoa: local.getPessoas()){
                             if(pessoa instanceof Aluno){
@@ -365,7 +366,7 @@ class Login extends JFrame{
         });
         
         label3 = new JLabel("Pessoas inscritas no convivio: "); this.add(label3);
-        Object[] listP = convivio.listaPessoas.toArray();
+        Object[] listP = convivio.getPessoas().toArray();
         combo2 = new JComboBox(listP);                
         numPessoas = new JTextField(); this.add(numPessoas);
         numPessoas.setText(Integer.toString(convivio.contPessoas)); //Pelo menos sempre um contador
@@ -378,7 +379,7 @@ class Login extends JFrame{
                 combo2.removeAllItems();
                 convivio = (Convivio)combo.getSelectedItem();
                 numPessoas.setText(Integer.toString(convivio.contPessoas)); //Atualiza contador
-                for(Pessoa pessoa:convivio.listaPessoas){
+                for(Pessoa pessoa:convivio.getPessoas()){
                     combo2.addItem(pessoa.getNome());
                 }
             

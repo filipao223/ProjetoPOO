@@ -32,7 +32,10 @@ abstract class Local implements Serializable{
     int getMaxGuestList(){
         return 1;
     }
-    int addGuestList(Pessoa p){
+    int addToGuestList(Pessoa p){
+        return 1;
+    }
+    int removeFromGuestList(Pessoa p){
         return 1;
     }
 

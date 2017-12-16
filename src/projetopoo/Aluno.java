@@ -16,11 +16,11 @@ class Aluno extends Pessoa{
     private final String nome, perfil, tipo;
     private String password;
     
-    protected ArrayList<Local> listaLocais = new ArrayList<>();
+    private ArrayList<Local> listaLocais = new ArrayList<>();
     private final int maxLocais = 5;
     private int contLocais = 0;
     
-    protected Convivio convInscrito;
+    private Convivio convInscrito;
     
     public Aluno(String nome, String perfil, String tipo) {
         this.nome = nome;
@@ -111,7 +111,9 @@ class Aluno extends Pessoa{
     
     @Override
     public ArrayList<Local> getLocais(){
-        return this.listaLocais;
+        ArrayList<Local> temp = new ArrayList<>();
+        temp.addAll(this.listaLocais);
+        return temp;
     }
     
     @Override

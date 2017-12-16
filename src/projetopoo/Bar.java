@@ -18,10 +18,10 @@ class Bar extends Local{
     private final String coordGPS;
     private int nInscritos=0;
   
-    protected Convivio convInscrito;    
+    private Convivio convInscrito;    
 
-    protected ArrayList<Pessoa> guestList = new ArrayList<>();
-    protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+    private ArrayList<Pessoa> guestList = new ArrayList<>();
+    private ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
     public Bar(String coordGPS, int lotacao, int maxPercentage, int custoMin) {
         this.coordGPS = coordGPS;
@@ -31,7 +31,7 @@ class Bar extends Local{
     }
     
     @Override
-    protected int addGuestList(Pessoa p){
+    protected int addToGuestList(Pessoa p){
         if(contGuestList>=maxGuestList){
             System.out.println("Erro.Numero maximo de pessoas na guest list.");
             return 0;
@@ -49,6 +49,19 @@ class Bar extends Local{
             
             return 1;
         }
+    }
+    
+    @Override
+    protected int removeFromGuestList(Pessoa p){
+        //Verifica se está na guest list
+        for(Pessoa pessoa:this.guestList){
+            if(pessoa == p){
+                this.guestList.remove(p);
+                return 1;
+            }
+        }
+        
+        return 0;
     }
     
     @Override
@@ -125,6 +138,8 @@ class Bar extends Local{
     }
     @Override
     public ArrayList<Pessoa> getGuestList(){
-        return this.guestList;
+        ArrayList<Pessoa> temp = new ArrayList<>();
+        temp.addAll(this.guestList);
+        return temp;
     }
 }

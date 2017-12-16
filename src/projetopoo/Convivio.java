@@ -17,8 +17,8 @@ class Convivio implements Serializable{
     protected final String nome;
     protected int contPessoas = 0;
     
-    protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
-    protected ArrayList<Local> listaLocais = new ArrayList<>();
+    private ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+    private ArrayList<Local> listaLocais = new ArrayList<>();
     
     public Convivio(String nome, ArrayList<Local> listaLocais) {
         this.nome = nome;
@@ -112,13 +112,38 @@ class Convivio implements Serializable{
             System.out.println("1nErro. Local inexistente.");
             return 0;
         }
-        l.addGuestList(p);
+        l.addToGuestList(p);
         
         return 1;
     }
     
     private boolean login(Pessoa p, String pw){
         return true;
+    }
+    
+    public ArrayList<Pessoa> getPessoas(){
+        ArrayList<Pessoa> temp = new ArrayList<>();
+        temp.addAll(this.listaPessoas);
+        return temp;
+    }
+    
+    public ArrayList<Local> getLocais(){
+        ArrayList<Local> temp = new ArrayList<>();
+        temp.addAll(this.listaLocais);
+        return temp;
+    }
+    
+    public int addLocal(Local l){
+        //Verifica se o local ainda não está na lista
+        for(Local local:this.listaLocais){
+            if(local == l){
+                System.out.println("Erro. Local já se encontra na lista");
+                return 0;
+            }
+        }
+        
+        this.listaLocais.add(l);
+        return 1;
     }
     
     @Override

@@ -39,11 +39,7 @@ public class ProjetoPOO {
             //Verifica se os ficheiros existem
             if(new File("Pessoas").isFile() && new File("Locais").isFile() && new File("Convivios").isFile() && new File("Desportos").isFile()){
                 System.out.println("Ficheiro obj existe");
-                loadConfigObj(comunidadeDEI, listaLocais, listaConvivios, listaDesportos);
-                System.out.println("FORA: " + comunidadeDEI);
-                System.out.println("FORA: " + listaLocais);
-                System.out.println("FORA: " + listaConvivios);
-                System.out.println("FORA: " + listaDesportos);
+                loadConfigObj(comunidadeDEI, listaLocais, listaConvivios, listaDesportos);                
             }
             else{
                 System.out.println("Nao existe ficheiro Obj");
@@ -146,7 +142,6 @@ public class ProjetoPOO {
                 comunidadeDEI.add(p);
             }
         }catch(ClassNotFoundException | EOFException ex) {
-            System.out.println("Carregou pessoas: " + comunidadeDEI);
         }
         
         f = new FicheiroObjecto();
@@ -157,7 +152,6 @@ public class ProjetoPOO {
                 listaLocais.add(l);
             }
         }catch(ClassNotFoundException | EOFException ex) {
-            System.out.println("Carregou locais: " + listaLocais);
         }
         
         f = new FicheiroObjecto();
@@ -168,7 +162,6 @@ public class ProjetoPOO {
                 listaConvivios.add(c);
             }
         }catch(ClassNotFoundException | EOFException ex) {
-            System.out.println("Carregou convivios: " + listaConvivios);
         }
         
         f = new FicheiroObjecto();
@@ -179,12 +172,13 @@ public class ProjetoPOO {
                 listaDesportos.add(d);
             }
         }catch(ClassNotFoundException | EOFException ex) {
-            System.out.println("Carregou desportos: " + listaDesportos);
         }
         
         //Adiciona as listas aos convivios
         for(Convivio conv:listaConvivios){
-            conv.listaLocais.addAll(listaLocais);
+            for(Local local:listaLocais){
+                conv.addLocal(local);
+            }
         }
         
         return 1;

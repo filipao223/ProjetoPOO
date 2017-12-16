@@ -21,7 +21,7 @@ class Prof extends Pessoa{
     private int contLocais = 0;
     private final int maxLocais = 5;
     
-    protected Convivio convInscrito;
+    private Convivio convInscrito;
     
     public Prof(String nome, String perfil, String tipo) {
         this.nome = nome;
@@ -116,7 +116,9 @@ class Prof extends Pessoa{
     
     @Override
     public ArrayList<Local> getLocais(){
-        return this.listaLocais;
+        ArrayList<Local> temp = new ArrayList<>();
+        temp.addAll(this.listaLocais);
+        return temp;
     }
     
     @Override
