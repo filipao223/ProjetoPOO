@@ -38,11 +38,10 @@ class Inscriçao_Locais extends JFrame{
      * Construtor da frame que vai permitir ao utilizador inscrever-se e desincrever-se em locais, guest
      * lists, ver receita e ver lista de locais inscritos.
      * @param convivio  Convivio escolhido
-     * @param listaC
-     * @param listaL
-     * @param pessoa 
+     * @param listaL    Lista de locais
+     * @param pessoa    Utilizador
      */
-    public Inscriçao_Locais(Convivio convivio,ArrayList<Convivio> listaC,ArrayList<Local> listaL, Pessoa pessoa){
+    public Inscriçao_Locais(Convivio convivio, ArrayList<Local> listaL, Pessoa pessoa){
         this.setPreferredSize(new Dimension(800,350));
         this.setTitle("Inscrições Locais");
         this.setLocation(100,100);
@@ -267,7 +266,12 @@ class Inscriçao_Locais extends JFrame{
         this.pack();
     }
 }
-  
+
+/**
+ * 
+ * @author João Montenegro
+ * @author João Mendes
+ */
 class Login extends JFrame{
     
     private final JTextField nome;
@@ -285,7 +289,13 @@ class Login extends JFrame{
     
     Convivio convivio;
     
-    
+    /**
+     * Construtor da frame Login, que vai ter a lista de convivios, o numero e a lista
+     * de pessoas inscritas no convivio escolhido e as caixas de nome e password.
+     * @param listaC    Lista de convivios
+     * @param listaL    Lista de locais
+     * @param listaP    Lista de pessoas
+     */
     public Login(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         
         this.setPreferredSize(new Dimension(420,300));
@@ -326,7 +336,7 @@ class Login extends JFrame{
                             //Pessoa já está inscrita
                             System.out.println("Pessoa já inscrita em -" + convivio.getNome() + "-.");
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaC,listaL, pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaL, pessoa);
                             
                             //Ordena a lista de locais de Mais iscritos para Menos inscritos
                             Collections.sort(listaL, new LocalComparator());
@@ -337,7 +347,7 @@ class Login extends JFrame{
                             System.out.println("Pessoa ainda não inscrita em -" + convivio.getNome() + "-. Inscrita automaticamente.");
                             pessoa.setPassword(passwordInput); //Password da pessoa é agora a introduzida na caixa
                             convivio.addPessoa(pessoa);
-                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaC,listaL, pessoa);
+                            Inscriçao_Locais Interface = new Inscriçao_Locais(convivio,listaL, pessoa);
                             
                             //Ordena a lista de locais de Mais iscritos para Menos inscritos
                             Collections.sort(listaL, new LocalComparator());
@@ -401,13 +411,24 @@ class Login extends JFrame{
         this.pack();
     }
 }
-    
+
+/**
+ * 
+ * @author João Montenegro
+ * @author João Mendes
+ */
 class Inicial extends JFrame{
         
     private final JButton buttonLogin;
     private final JButton buttonSai;
         
-        
+    /**
+     * Construtor da frame Inicial que contem a opção de entrar na frame Login e sair.
+     * Esta frame é destruída depois de entrar na frame Login.
+     * @param listaC    Lista de convivios
+     * @param listaL    Lista de locais
+     * @param listaP    Lista de pessoas
+     */
     public Inicial(ArrayList<Convivio> listaC,ArrayList<Local> listaL,ArrayList<Pessoa> listaP){
         
         this.setPreferredSize(new Dimension(200,300));
