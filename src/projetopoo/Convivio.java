@@ -75,7 +75,7 @@ class Convivio implements Serializable{
         }
         //Verifica existencia do local
         if(checkLocal(l) != 1){
-            System.out.println("1nErro. Local inexistente.");
+            System.out.println("\nErro. Local inexistente.");
             return 0;
         }
         

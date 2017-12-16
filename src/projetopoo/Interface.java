@@ -84,13 +84,12 @@ class Inscriçao_Locais extends JFrame{
                             System.out.println("Máximo lotação do bar atingido!");
                             JOptionPane.showMessageDialog(null, "Máximo lotação do bar atingido, não inscrito.", "Máximo lotação", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    }
+                    } //Fim if se for Bar
                     else{
                         convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
                         System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
                         buttonInscrever.setSelected(false);
                     }
-                    buttonInscrever.setSelected(false);
                 }
             }
         });
