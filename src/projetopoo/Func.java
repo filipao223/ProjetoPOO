@@ -24,7 +24,7 @@ class Func extends Pessoa{
     private Convivio convInscrito;
     
     /**
-     * Construtor da classe
+     * Construtor da classe Func
      * @param nome Nome do funcionário
      * @param perfil Perfil do funcionario (boémio, cultural, ...)
      * @param tipo Tipo do funcionario (tempo parcial ou inteiro)
@@ -86,6 +86,9 @@ class Func extends Pessoa{
         return 0;
     }
     
+    /**
+     * Incrementa o contador de locais da pessoa
+     */
     private void incrContLocais(){
         this.contLocais++;
     }

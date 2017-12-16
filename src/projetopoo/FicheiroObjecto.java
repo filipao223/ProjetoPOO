@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
+ * Classe com métodos para trabalhar com ficheiros de objectos.
  * @author João Montenegro
  * @author João Mendes
  */

@@ -8,7 +8,7 @@ package projetopoo;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author João Montenegro
  * @author João Mendes
  */
@@ -23,6 +23,12 @@ class Aluno extends Pessoa{
     
     private Convivio convInscrito;
     
+    /**
+     * Construtor da classe Aluno
+     * @param nome      Nome do aluno
+     * @param perfil    Perfil do aluno (boemio, cultural, ...)
+     * @param tipo      Tipo do aluno (curso)
+     */
     public Aluno(String nome, String perfil, String tipo) {
         this.nome = nome;
         this.perfil = perfil;
@@ -80,6 +86,9 @@ class Aluno extends Pessoa{
         return 0;
     }
     
+    /**
+     * Incrementa o contador de locais da pessoa
+     */
     private void incrContLocais(){
         this.contLocais++;
     }

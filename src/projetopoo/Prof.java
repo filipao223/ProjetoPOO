@@ -24,6 +24,12 @@ class Prof extends Pessoa{
     
     private Convivio convInscrito;
     
+    /**
+     * Construtor da classe Prof
+     * @param nome      Nome do professor
+     * @param perfil    Perfil do professor (boemio, cultural, ...)
+     * @param tipo      Tipo do professor (associado, auxiliar, ...)
+     */
     public Prof(String nome, String perfil, String tipo) {
         this.nome = nome;
         this.perfil = perfil;
@@ -80,6 +86,9 @@ class Prof extends Pessoa{
         return 0;
     }
     
+    /**
+     * Incrementa o contador de locais da pessoa
+     */
     private void incrContLocais(){
         this.contLocais++;
     }

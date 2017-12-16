@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe com métodos para trabalhar com ficheiros de texto.
  * @author João Montenegro
  * @author João Mendes
  */

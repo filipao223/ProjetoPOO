@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe principal
  * @author João Montenegro
  * @author João Mendes
  */

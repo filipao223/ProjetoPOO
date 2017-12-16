@@ -12,7 +12,8 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * JFrame que vai permitir ao utilizador inscrever-se e desincrever-se em locais, guest
+ * lists, ver receita e ver lista de locais inscritos
  * @author João Montenegro
  * @author João Mendes
  */
@@ -268,7 +269,8 @@ class Inscriçao_Locais extends JFrame{
 }
 
 /**
- * 
+ * JFrame que vai ter a lista de convivios, o numero e a lista
+ * de pessoas inscritas no convivio escolhido e as caixas de nome e password.
  * @author João Montenegro
  * @author João Mendes
  */
@@ -413,7 +415,8 @@ class Login extends JFrame{
 }
 
 /**
- * 
+ * JFrame inicial que contem a opção de entrar na frame Login e sair.
+ *
  * @author João Montenegro
  * @author João Mendes
  */
