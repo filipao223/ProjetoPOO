@@ -87,8 +87,10 @@ class Inscriçao_Locais extends JFrame{
                                     JOptionPane.showMessageDialog(null, "Não foi possivel adicionar à guest list.", "Não adicionado", JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }
-                            
-                            convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
+                            int retValue = 0; //Verifica o valor devolvido por addLocalToPessoa e mostra uma mensagem
+                            if((retValue = convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem())) == -1) JOptionPane.showMessageDialog(null, "Numero máximo de locais atingido!", "Não Inscrito", JOptionPane.INFORMATION_MESSAGE);
+                            else if(retValue == 0) JOptionPane.showMessageDialog(null, "Não inscrito no local seleccionado!", "Não Inscrito", JOptionPane.INFORMATION_MESSAGE);
+                            else JOptionPane.showMessageDialog(null, "Incrito no local seleccionado!", "Inscrito", JOptionPane.INFORMATION_MESSAGE);
                             buttonInscrever.setSelected(false);
 
                         } //Fim if da lotação
@@ -98,7 +100,11 @@ class Inscriçao_Locais extends JFrame{
                         }
                     } //Fim if se for Bar
                     else{
-                        convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem());
+                        int retValue = 0; //Verifica o valor devolvido por addLocalToPessoa e mostra uma mensagem
+                        if((retValue = convivio.addLocalToPessoa(pessoa, (Local)combo.getSelectedItem())) == -1) JOptionPane.showMessageDialog(null, "Numero máximo de locais atingido!", "Não Inscrito", JOptionPane.INFORMATION_MESSAGE);
+                        else if(retValue == 0) JOptionPane.showMessageDialog(null, "Não inscrito no local seleccionado!", "Não Inscrito", JOptionPane.INFORMATION_MESSAGE);
+                        else JOptionPane.showMessageDialog(null, "Incrito no local seleccionado!", "Inscrito", JOptionPane.INFORMATION_MESSAGE);
+                        
                         System.out.println("Lista de locais em inscricao_locais: " + pessoa.getLocais());
                         buttonInscrever.setSelected(false);
                     }
@@ -116,13 +122,20 @@ class Inscriçao_Locais extends JFrame{
                         if(((Bar)comboLocalPessoa.getSelectedItem()).getGuestList().contains(pessoa)) ((Bar)comboLocalPessoa.getSelectedItem()).removeFromGuestList(pessoa);
                     }
                     
-                    convivio.removeLocalFromPessoa(pessoa, (Local)comboLocalPessoa.getSelectedItem());
+                    //Verifica se o utilizador escolheu um local da combobox correta
+                    if((Local)comboLocalPessoa.getSelectedItem() == null) JOptionPane.showMessageDialog(null, "Selecione um local da lista de locais inscritos", "Não Desinscrito", JOptionPane.INFORMATION_MESSAGE);
+                    else{
+                        int retValue = 0; //Verifica o valor devolvido por removeLocalFromPessoa e mostra uma mensagem
+                        if((retValue = convivio.removeLocalFromPessoa(pessoa, (Local)comboLocalPessoa.getSelectedItem())) == 0) JOptionPane.showMessageDialog(null, "Não desinscrito do local seleccionado!", "Não Desinscrito", JOptionPane.INFORMATION_MESSAGE);
+                        else JOptionPane.showMessageDialog(null, "Desinscrito do local seleccionado!", "Desinscrito", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    
                     buttonDesinscrever.setSelected(false);
                 }                
             }           
         });
         
-        buttonSai = new JButton("Sai");this.add(buttonSai);
+        buttonSai = new JButton("Sai");this.add(buttonSai); //Botão de saída
         buttonSai.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
@@ -133,7 +146,7 @@ class Inscriçao_Locais extends JFrame{
                         
         this.add(combo);
         
-        ButtonGroup group = new ButtonGroup();
+        ButtonGroup group = new ButtonGroup(); //Grupo das exposições
         Exposições = new JRadioButton("Exposições",true);
         Exposições.addActionListener(new ActionListener(){
             @Override
@@ -155,12 +168,12 @@ class Inscriçao_Locais extends JFrame{
         group.add(Exposições);
         this.add(Exposições);
         
-        Bares = new JRadioButton("Bares",true);
+        Bares = new JRadioButton("Bares",true); //Grupo dos bares
         Bares.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
                 if (Bares.isSelected()){
-                    buttonGuestList.setVisible(true);
+                    buttonGuestList.setVisible(true); //
                     comboGuestList.setVisible(true); //Mostra o botao e lista da guestList
                     combo.removeAllItems();
                     for(Local local:listaL){
@@ -175,7 +188,7 @@ class Inscriçao_Locais extends JFrame{
         this.add(Bares);
         
         
-        Jardins = new JRadioButton("Jardins",true);
+        Jardins = new JRadioButton("Jardins",true); //Grupo dos jardins
         Jardins.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
@@ -194,7 +207,7 @@ class Inscriçao_Locais extends JFrame{
         group.add(Jardins);
         this.add(Jardins);
         
-        Desporto = new JRadioButton("Parques Desportivos",true);
+        Desporto = new JRadioButton("Parques Desportivos",true); //Grupo dos desportos
         Desporto.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
@@ -213,7 +226,7 @@ class Inscriçao_Locais extends JFrame{
         group.add(Desporto);
         this.add(Desporto);
         
-        comboLocalPessoa = new JComboBox(new String[]{}); this.add(comboLocalPessoa);
+        comboLocalPessoa = new JComboBox(new String[]{}); this.add(comboLocalPessoa); //Combo box dos locais em que a pessoa está inscrita
         buttonLocalInscrito = new JButton("Locais Inscritos"); this.add(buttonLocalInscrito);
         buttonLocalInscrito.addActionListener(new ActionListener(){
             @Override
@@ -228,7 +241,7 @@ class Inscriçao_Locais extends JFrame{
         });
         
         
-        comboGuestList = new JComboBox(new String[] {}); this.add(comboGuestList);
+        comboGuestList = new JComboBox(new String[] {}); this.add(comboGuestList); //Combo box da guest list
         buttonGuestList = new JButton("GuestList do Bar"); this.add(buttonGuestList);
         buttonGuestList.setVisible(false);
         buttonGuestList.addActionListener(new ActionListener(){
@@ -243,7 +256,7 @@ class Inscriçao_Locais extends JFrame{
             }
         });
         
-        buttonReceita = new JButton("Receita Prevista");this.add(buttonReceita);
+        buttonReceita = new JButton("Receita Prevista");this.add(buttonReceita); //Botão da receita
         buttonReceita.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event){
@@ -251,7 +264,7 @@ class Inscriçao_Locais extends JFrame{
                 for(Local local: convivio.getLocais()){
                     if (local instanceof Bar || local instanceof Exposicao){
                         for(Pessoa pessoa: local.getPessoas()){
-                            if(pessoa instanceof Aluno){
+                            if(pessoa instanceof Aluno){ //Aluno tem desconto
                                 receita = (int)(receita + local.getCusto()*0.90);
                             }
                             else{

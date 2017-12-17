@@ -26,7 +26,7 @@ abstract class Pessoa implements Serializable{
      * Remove o local passado por parametro da lista de locais da pessoa, verificando
      * se existe na lista de locais da pessoa
      * @param local Local que se pretende remover da pessoa
-     * @return      1 se o local for removido, 0 caso contrário
+     * @return      1 se o local for removido, -1 se o numero maximo de locais for atingido, 0 caso contrário
      */
     abstract int removeLocal(Local local);
     /**

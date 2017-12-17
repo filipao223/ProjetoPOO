@@ -98,10 +98,11 @@ class Convivio implements Serializable{
      * e na lista de locais, o método chama o método addLocal da pessoa p, passando-lhe o local l.
      * @param p Pessoa a ser a adicionada
      * @param l Local ao qual vai ser adicionada a pessoa
-     * @return  1 se a pessoa for adicionada, 0 caso contrario
+     * @return  1 se a pessoa for adicionada, -1 se a pessoa atingiu o numero maximo de locais, 0 caso contrário
      */
     protected int addLocalToPessoa(Pessoa p, Local l){
         //Verifica existencia da pessoa
+        int retValue;
         if(checkPessoa(p) != 1){
             System.out.println("\nErro. Pessoa inexistente.");
             return 0;
@@ -112,7 +113,8 @@ class Convivio implements Serializable{
             return 0;
         }
         
-        if(p.addLocal(l) == 1) return 1;
+        if((retValue = p.addLocal(l)) == 1) return 1;
+        else if(retValue == -1) return -1;
         else return 0;
     }
     

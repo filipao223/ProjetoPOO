@@ -52,7 +52,7 @@ class Prof extends Pessoa{
     protected int addLocal(Local local){
         if(this.contLocais>=this.maxLocais){
             System.out.println("\nErro. Numero maximo de locais incritos atingido.");
-            return 0;
+            return -1;
         }
         
         for(Local l:this.listaLocais){

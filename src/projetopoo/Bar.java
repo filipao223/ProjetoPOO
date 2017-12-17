@@ -121,7 +121,7 @@ class Bar extends Local{
     
     @Override
     public String toString(){
-        return "GPS:" + this.coordGPS + " Preço:" + this.custoMin + "€ Guests:" + this.maxGuestList + "NºInsc:" + this.getNInscritos();
+        return "GPS:" + this.coordGPS + " Preço:" + this.custoMin + "€ Lotação: " + this.getLotacao()+ " Guests:" + this.maxGuestList + " NºInsc:" + this.getNInscritos();
     }
     
     @Override
