@@ -50,14 +50,6 @@ public class ProjetoPOO {
         }catch(IOException ioexcep){
             System.out.println("Erro ao carregar as informaçoes: " + ioexcep);
         }
-        
-        while(true){
-            System.out.println("OPÇÕES:\n\t1.Listar listas\n\t2.Increver pessoa em convivio"
-                    + "\n\t3.Adicionar local a pessoa\n\t4.Listar locais de pessoa\n\t"
-                    + "5.Listar pessoas de local\n\t6.Sair: ");
-            int esc = sc.nextInt();
-            sc.nextLine();
-        }
     }
     
     /**
