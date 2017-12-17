@@ -112,6 +112,12 @@ abstract class Local implements Serializable{
      * @return Cópia da lista de pessoas inscritas no lcoal
      */
     abstract ArrayList<Pessoa> getPessoas();
+    /**
+     * Adiciona um desporto passado por parametro à lista de desportos do parque de desportos.
+     * @param d Desporto a adicionar.
+     */
+    void addDesporto(Desporto d){
+    }
 }
 
 /**

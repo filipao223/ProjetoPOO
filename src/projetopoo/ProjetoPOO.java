@@ -197,6 +197,15 @@ public class ProjetoPOO {
             }
         }
         
+        //Adiciona os desportos aos parques de desportos
+        for(Local local:listaLocais){
+            if(local instanceof ParqueDesporto){
+                for(Desporto desp:listaDesportos){
+                    ((ParqueDesporto) local).addDesporto(desp);
+                }
+            }
+        }
+        
         return 1;
     }
     

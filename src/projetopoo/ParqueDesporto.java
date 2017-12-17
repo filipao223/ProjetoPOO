@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 class ParqueDesporto extends Parque{
     
-    protected ArrayList<Desporto> listaDesportos = new ArrayList<>();
-    protected Convivio convInscrito;
+    private ArrayList<Desporto> listaDesportos = new ArrayList<>();
+    private Convivio convInscrito;
     private final String coordGPS;
     private int nInscritos=0;
     
-    protected ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+    private ArrayList<Pessoa> listaPessoas = new ArrayList<>();
     
     public ParqueDesporto(String coordGPS) {
         this.coordGPS = coordGPS;
@@ -61,7 +61,14 @@ class ParqueDesporto extends Parque{
     
     @Override
     public ArrayList<Pessoa> getPessoas(){
-        return this.listaPessoas;
+        ArrayList<Pessoa> temp = new ArrayList<>();
+        temp.addAll(this.listaPessoas);
+        return temp;
+    }
+    
+    @Override
+    public void addDesporto(Desporto d){
+        this.listaDesportos.add(d);
     }
     
     @Override
