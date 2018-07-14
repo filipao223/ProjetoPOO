@@ -1,5 +1,13 @@
 # ProjetoPOO
 
+Projeto para Programação Orientada aos Objectos [POO]
+
+Realizado por:
+
+João Filipe Sequeira Montenegro   Nº2016228672
+
+João Miguel Rainho Mendes   Nº2016230975
+
 ### ~~1. Inscrição no convívio~~
 - ~~A inscrição está restrita aos membros da comunidade do DEI~~
 - ~~Cada pessoa deve inserir uma palavra chave para controlo de~~
